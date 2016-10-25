@@ -1,5 +1,6 @@
 import requests
 from time import gmtime, strftime
+from time import sleep 
 
 def make_requests(key):
     url = "https://mewsician.herokuapp.com/api/"+key+"/demotime"
@@ -7,4 +8,4 @@ def make_requests(key):
 
 while True:
     print make_requests('hi')
-    sleep(10)
+    sleep(5)
