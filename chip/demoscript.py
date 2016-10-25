@@ -1,11 +1,12 @@
 import requests
 from time import gmtime, strftime
 from time import sleep 
+import random
 
-def make_requests(key):
-    url = "https://mewsician.herokuapp.com/api/"+key+"/demotime"
-    return requests.put(url, data = {'date':  strftime("%Y-%m-%d %H:%M:%S", gmtime())})
+def make_requests():
+    url = "https://mewsician.herokuapp.com/demotime"
+    return requests.put(url, data = {'data':  "Hello Mewsician, here's a random number: " + str(random.randint(0,100)) })
 
 while True:
-    print make_requests('hi')
+    print make_requests()
     sleep(5)
