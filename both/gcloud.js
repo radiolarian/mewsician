@@ -25,11 +25,11 @@ if (Meteor.isServer) {
   });
 }
 
-Music = new FilesCollection({
+this.Music = new FilesCollection({
   debug: true, // Set to true to enable debugging messages
   throttle: false,
   storagePath: 'media',
-  collectionName: 'music',
+  collectionName: 'Music',
   allowClientCode: false,
 
   onAfterUpload: function(fileRef) {
