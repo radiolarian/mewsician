@@ -4,7 +4,11 @@
   <h3> your music </h3>
   <ul>
     {{#each files}}
-    <li> {{ time }} - {{ data }} </li>
+    <li>
+      <b>{{ name }}</b>
+      - <i>{{ size }}b</i>
+      - <a href="{{path}}" target="_blank">download</a>
+    </li>
     {{/each}}
   </ul>
 </template>

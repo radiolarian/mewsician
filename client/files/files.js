@@ -4,29 +4,25 @@ import { Music } from '../../imports/music.js';
 // for the file listing template
 
 Template.files.helpers({
-  files() {
-    // time sort the posts and then return
-    return Music.find({}, {sort: {time: -1}})
-      .map( s => s );
-    //.map( s => s.title );
+  files() { // time sort the posts and then return
+    return Music.find({}, {sort: {time: -1}});
   },
 });
 
-
 // for the uploading form
 
-Template.uploadForm.onCreated(function () {
+Template.uploadForm.onCreated(() => {
   this.currentUpload = new ReactiveVar(false);
 });
 
 Template.uploadForm.helpers({
-  currentUpload: function () {
+  currentUpload() {
     return Template.instance().currentUpload.get();
-  }
+  },
 });
 
 Template.uploadForm.events({
-  'change #fileInput': function (e, template) {
+  'change #fileInput': (e, template) => {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
 
       // We upload only one file, in case

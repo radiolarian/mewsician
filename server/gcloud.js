@@ -2,12 +2,11 @@
 
 var Request = Npm.require('request');
 var gcloud = Npm.require('google-cloud')({
-  projectId: process.env.PROJECT_ID || 'meow',
+  projectId: 'mewsician-148407',
   keyFilename: Meteor.absolutePath + '/gcloud-secret.json'
 });
 
-var gcs = gcloud.storage();
-var bucket = gcs.bucket('mewsician');
+var bucket = gcloud.storage().bucket('mewsician');
 bucket.getMetadata((error, metadata, apiResponse) => {
   if (error) console.error(error);
 });
@@ -30,16 +29,15 @@ Music.remove = function(search) {
     _.each(fileRef.versions, function(vRef) {
       var ref;
       if (vRef != null ? (ref = vRef.meta) != null ? ref.pipePath : void 0 : void 0) {
-        bucket.deleteFiles(vRef.meta.pipePath, function(error) {
-          bound(function() {
-            if (error) {
-              console.error(error);
-            }
+        bucket.deleteFiles(vRef.meta.pipePath, (error) => {
+          bound(() => {
+            if (error) console.error(error);
           });
         });
       }
     });
   });
+
   // Call the original removal method
   _origRemove.call(this, search);
 };

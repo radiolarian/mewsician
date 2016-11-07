@@ -1,5 +1,6 @@
 // function split into import file for modularity
 
+import { Random } from 'meteor/random'
 import { FilesCollection } from 'meteor/ostrio:files';
 import { getReadableStream } from './getReadableStream';
 
@@ -8,7 +9,7 @@ import { getReadableStream } from './getReadableStream';
 Music = new FilesCollection({
   debug: true, // Set to true to enable debugging messages (todo: change to false)
   throttle: false,
-  storagePath: 'assets/app/uploads/',
+  storagePath: 'assets/app/uploads',
   collectionName: 'music',
   allowClientCode: false,
 
