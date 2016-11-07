@@ -25,3 +25,4 @@ iron:router
 ostrio:files
 accounts-ui@1.1.9
 ostrio:meteor-root
+stylus
