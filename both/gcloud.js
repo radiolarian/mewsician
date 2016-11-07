@@ -3,7 +3,7 @@ var gcloud, gcs, bucket, bucketMetadata, Request, bound, Collections = {};
 if (Meteor.isServer) {
   gcloud = Npm.require('google-cloud')({
     projectId: process.env.PROJECT_ID ||'meow', // <-- Replace this with your project ID
-    keyFilename: 'gcloud-secret.json'  // <-- Replace this with the path to your key.json
+    keyFilename: Meteor.absolutePath + '/gcloud-secret.json'  // <-- Replace this with the path to your key.json
   });
   gcs = gcloud.storage();
   bucket = gcs.bucket('mewsician'); // <-- Replace this with your bucket name
@@ -19,7 +19,7 @@ if (Meteor.isServer) {
 }
 
 Collections.files = new FilesCollection({
-  debug: false, // Set to true to enable debugging messages
+  debug: true, // Set to true to enable debugging messages
   throttle: false,
   storagePath: 'assets/app/uploads/uploadedFiles',
   collectionName: 'uploadedFiles',

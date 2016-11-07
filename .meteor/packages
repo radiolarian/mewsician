@@ -24,3 +24,4 @@ http@1.2.10
 iron:router
 ostrio:files
 accounts-ui@1.1.9
+ostrio:meteor-root
