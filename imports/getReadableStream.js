@@ -1,3 +1,5 @@
+// https://github.com/VeliovGroup/Meteor-Files/wiki/Google-Cloud-Storage-Integration
+
 function getReadableStream(http, path, vRef){
   var array, end, partial, remoteReadStream, reqRange, responseType, start, take;
 

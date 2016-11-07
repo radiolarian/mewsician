@@ -1,3 +1,4 @@
+// from https://github.com/VeliovGroup/Meteor-Files/wiki/Google-Cloud-Storage-Integration
 var gcloud, gcs, bucket, bucketMetadata, Request, bound, Collections = {};
 
 gcloud = Npm.require('google-cloud')({

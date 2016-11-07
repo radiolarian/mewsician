@@ -1,4 +1,8 @@
-Collecitons = {};
+// from https://github.com/VeliovGroup/Meteor-Files/wiki/Google-Cloud-Storage-Integration
+Collections = {};
+
+// function split into import file for modularity
+import {getReadableStream} from '../import/getReadableStream';
 
 Collections.files = new FilesCollection({
   debug: true, // Set to true to enable debugging messages
@@ -65,5 +69,4 @@ Collections.files = new FilesCollection({
     }
   }
 });
-
 
