@@ -8,7 +8,11 @@ Router.configure({
 });
 
 Router.route('/', {
-  template: 'hello'
+  template: 'main'
+});
+
+Router.route('/demo', {
+  template: 'demo'
 });
 
 // handle very simple post requests by dumping into posts mongo collection

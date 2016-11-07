@@ -2,10 +2,16 @@
   <title>mewsician</title>
 </head>
 
+<!-- can insert things for every page here-->
+
 <body>
-  <!-- can insert things for every page here-->
 </body>
 
 <template name="main">
+  <h1>mewsician</h1>
+  <pre>by goacat</pre>
+  {{> loginButtons}}
+  {{#if currentUser }}
   {{> yield}}
+  {{/if}}
 </template>
