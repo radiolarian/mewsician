@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Files } from '../../imports/files.js';
-import { Music } from '../../imports/gfiles.js';
+import { Music } from '../../imports/music.js';
 
 // for the file listing template
 

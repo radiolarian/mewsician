@@ -1,6 +1,6 @@
 // from https://github.com/VeliovGroup/Meteor-Files/wiki/Google-Cloud-Storage-Integration
 
-import { Gfiles } from '../imports/gfiles.js';
+import { Music } from '../imports/music.js';
 
 var gcloud, gcs, bucket, bucketMetadata, bound = {};
 gcloud = Npm.require('google-cloud')({
@@ -22,9 +22,9 @@ bound = Meteor.bindEnvironment(function(callback){
 
 
 // Intercept file's collection remove method to remove file from Google Cloud Storage
-var _origRemove = Gfiles.remove;
+var _origRemove = Music.remove;
 
-Gfiles.remove = function(search) {
+Music.remove = function(search) {
   var cursor = this.collection.find(search);
   cursor.forEach(function(fileRef) {
     _.each(fileRef.versions, function(vRef) {
