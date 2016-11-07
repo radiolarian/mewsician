@@ -2,11 +2,11 @@ var gcloud, gcs, bucket, bucketMetadata, Request, bound, Collections = {};
 
 if (Meteor.isServer) {
   gcloud = Npm.require('google-cloud')({
-    projectId: 'YOUR_PROJECT_ID', // <-- Replace this with your project ID
-    keyFilename: 'YOUR_KEY_JSON'  // <-- Replace this with the path to your key.json
+    projectId: process.env.PROJECT_ID ||'meow', // <-- Replace this with your project ID
+    keyFilename: 'gcloud-secret.json'  // <-- Replace this with the path to your key.json
   });
   gcs = gcloud.storage();
-  bucket = gcs.bucket('YOUR_BUCKET_NAME'); // <-- Replace this with your bucket name
+  bucket = gcs.bucket('mewsician'); // <-- Replace this with your bucket name
   bucket.getMetadata(function(error, metadata, apiResponse){
     if (error) {
       console.error(error);

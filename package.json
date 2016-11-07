@@ -2,7 +2,7 @@
   "name": "mewsician",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "source .environment && meteor run"
   },
   "dependencies": {
     "google-cloud": "^0.43.0",
