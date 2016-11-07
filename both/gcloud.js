@@ -2,7 +2,6 @@
 
 import { Random } from 'meteor/random'
 import { FilesCollection } from 'meteor/ostrio:files';
-import { getReadableStream } from '../imports/getReadableStream';
 
 var gcloud, gcs, bucket, bucketMetadata, Request, bound = {};
 
@@ -25,7 +24,7 @@ if (Meteor.isServer) {
   });
 }
 
-this.Music = new FilesCollection({
+Music = new FilesCollection({
   debug: true, // Set to true to enable debugging messages
   throttle: false,
   storagePath: 'media',
@@ -150,7 +149,6 @@ function getReadableStream(http, path, vRef){
   return remoteReadStream;
 }
 
-export {getReadableStream};
 if (Meteor.isServer) {
   // Intercept file's collection remove method to remove file from Google Cloud Storage
   var _origRemove = Music.remove;
@@ -175,5 +173,8 @@ if (Meteor.isServer) {
     _origRemove.call(this, search);
   };
 
-  Meteor.publish('files.music.all');
+  // only show the files that they have uploaded for right now
+   Meteor.publish('files.music.all', function () {
+    return Music.find({userId: this.userId}).cursor;
+  });
 }

@@ -1,7 +1,6 @@
 // just update the time shown on the page from our chip
 
 import { Posts } from '../imports/posts';
-import { Music } from '../imports/music';
 
 Router.configure({
   layoutTemplate: 'main'
