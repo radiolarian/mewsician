@@ -1,3 +1,6 @@
-.environment
 node_modules/
+.environment
+.DS_Store
 *json
+*swo
+*swp
