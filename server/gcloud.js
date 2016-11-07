@@ -1,10 +1,13 @@
 // from https://github.com/VeliovGroup/Meteor-Files/wiki/Google-Cloud-Storage-Integration
-var gcloud, gcs, bucket, bucketMetadata, Request, bound, Collections = {};
 
+import { Gfiles } from '../imports/gfiles.js';
+
+var gcloud, gcs, bucket, bucketMetadata, bound = {};
 gcloud = Npm.require('google-cloud')({
-  projectId: process.env.PROJECT_ID ||'meow', // <-- Replace this with your project ID
+  projectId: process.env.PROJECT_ID || 'meow', // <-- Replace this with your project ID
   keyFilename: Meteor.absolutePath + '/gcloud-secret.json'  // <-- Replace this with the path to your key.json
 });
+
 gcs = gcloud.storage();
 bucket = gcs.bucket('mewsician'); // <-- Replace this with your bucket name
 bucket.getMetadata(function(error, metadata, apiResponse){
@@ -19,9 +22,9 @@ bound = Meteor.bindEnvironment(function(callback){
 
 
 // Intercept file's collection remove method to remove file from Google Cloud Storage
-var _origRemove = Collections.files.remove;
+var _origRemove = Gfiles.remove;
 
-Collections.files.remove = function(search) {
+Gfiles.remove = function(search) {
   var cursor = this.collection.find(search);
   cursor.forEach(function(fileRef) {
     _.each(fileRef.versions, function(vRef) {
@@ -40,4 +43,3 @@ Collections.files.remove = function(search) {
   // Call the original removal method
   _origRemove.call(this, search);
 };
-
