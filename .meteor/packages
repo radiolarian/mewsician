@@ -27,3 +27,4 @@ accounts-ui@1.1.9
 ostrio:meteor-root
 stylus
 accounts-password
+aldeed:simple-schema
