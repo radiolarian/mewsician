@@ -8,7 +8,7 @@
     <li>
       <b>{{ name }}</b>
       - <i>{{ size }}b</i>
-      - <a class="file" href="{{ _downloadRoute }}">download</a>
+      - <a href="{{link}}?download=true" download="{{name}}" target="_parent" type="{{type}}"> {{name}} </a>
     </li>
     {{/each}}
   </ul>

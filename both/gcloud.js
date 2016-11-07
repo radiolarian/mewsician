@@ -24,6 +24,9 @@ if (Meteor.isServer) {
   });
 }
 
+// todo: make this nicer, more secure
+// https://github.com/VeliovGroup/Meteor-Files/wiki/Constructor
+
 Music = new FilesCollection({
   debug: true, // Set to true to enable debugging messages
   throttle: false,

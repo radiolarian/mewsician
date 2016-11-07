@@ -50,8 +50,8 @@ Router.map(function () {
 
   // downloading your media
 
-  this.route('media', {
-    path: '/media/',
+  this.route('serve', {
+    path: '/cdn/storage/Music/:_id/:_v/:_fname',
     where: 'server',
 
     action () {
