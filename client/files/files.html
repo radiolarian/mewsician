@@ -1,13 +1,14 @@
 <template name="files">
   <h3> upload here </h3>
   {{> uploadForm}}
+
   <h3> your music </h3>
   <ul>
     {{#each files}}
     <li>
       <b>{{ name }}</b>
       - <i>{{ size }}b</i>
-      - <a href="{{path}}" target="_blank">download</a>
+      - <a class="file" href="{{ _downloadRoute }}">download</a>
     </li>
     {{/each}}
   </ul>

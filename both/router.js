@@ -1,6 +1,7 @@
 // just update the time shown on the page from our chip
 
-import { Posts } from '../imports/posts.js';
+import { Posts } from '../imports/posts';
+import { Music } from '../imports/music';
 
 Router.configure({
   layoutTemplate: 'main'
@@ -21,7 +22,7 @@ Router.map(function () {
     path: '/demotime/',
     where: 'server',
 
-    action: function () {
+    action () {
       // time stamp all incoming data
       data = this.request.body;
       data.time = Date.now();
@@ -30,27 +31,40 @@ Router.map(function () {
       // respond saying successful post
       this.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
       this.response.end();
-    }
+    },
   });
-});
 
-// handle uploading media files over api into Google cloud storage
+  // handle uploading media files over api into Google cloud storage
 
-Router.map(function () {
   this.route('upload', {
     path: '/upload/',
     where: 'server',
 
-    action: function () {
-      // time stamp all incoming data
+    action () {
       data = this.request.body;
-      data.time = Date.now();
 
-      //Music.insert(data);
       // respond saying successful post
       this.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
       this.response.end();
-    }
+    },
+  });
+
+  // downloading your media
+
+  this.route('media', {
+    path: '/media/',
+    where: 'server',
+
+    action () {
+      data = this.request.body;
+      console.log(data)
+
+      // redirect to the real dl link
+      // todo!!!
+
+      // respond saying successful post
+      this.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+      this.response.end();
+    },
   });
 });
-

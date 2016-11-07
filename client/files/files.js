@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { Music } from '../../imports/music.js';
 
 // for the file listing template
 
@@ -11,7 +10,7 @@ Template.files.helpers({
 
 // for the uploading form
 
-Template.uploadForm.onCreated(() => {
+Template.uploadForm.onCreated(function() {
   this.currentUpload = new ReactiveVar(false);
 });
 
@@ -29,8 +28,8 @@ Template.uploadForm.events({
       // multiple files were selected
       var upload = Music.insert({
         file: e.currentTarget.files[0],
+        chunkSize: 'dynamic',
         streams: 'dynamic',
-        chunkSize: 'dynamic'
       }, false);
 
       upload.on('start', function () {
@@ -41,7 +40,7 @@ Template.uploadForm.events({
         if (error) {
           alert('Error during upload: ' + error);
         } else {
-          alert('File "' + fileObj.name + '" successfully uploaded');
+          console.log('File "' + fileObj.name + '" successfully uploaded');
         }
         template.currentUpload.set(false);
       });
