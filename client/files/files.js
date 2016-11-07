@@ -3,8 +3,12 @@ import { Template } from 'meteor/templating';
 // for the file listing template
 
 Template.files.helpers({
-  files() { // time sort the posts and then return
-    return Music.find({}, {sort: {time: -1}});
+  files() {
+    return Music.find({});
+  },
+
+  link() {
+    return Music.findOne(this._id).link();
   },
 });
 

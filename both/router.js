@@ -34,24 +34,22 @@ Router.map(function () {
   });
 
   // handle uploading media files over api into Google cloud storage
+  //this.route('upload', {
+  //path: '/upload/',
+  //where: 'server',
 
-  this.route('upload', {
-    path: '/upload/',
-    where: 'server',
+  //action () {
+  //data = this.request.body;
 
-    action () {
-      data = this.request.body;
-
-      // respond saying successful post
-      this.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-      this.response.end();
-    },
-  });
+  //// respond saying successful post
+  //this.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+  //this.response.end();
+  //},
+  //});
 
   // downloading your media
-
-  this.route('serve', {
-    path: '/cdn/storage/Music/:_id/:_v/:_fname',
+  this.route('/media', {
+    path: '/cdn/storage/music/:_id/:_v/:_fname',
     where: 'server',
 
     action () {

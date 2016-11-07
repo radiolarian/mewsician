@@ -7,8 +7,9 @@
     {{#each files}}
     <li>
       <b>{{ name }}</b>
+      <!--- <a href="{{link}}?download=true" download="{{name}}" target="_blank" type="{{type}}">view</a>-->
+      - <a href="{{link}}" target="_blank" type="{{type}}">view</a>
       - <i>{{ size }}b</i>
-      - <a href="{{link}}?download=true" download="{{name}}" target="_parent" type="{{type}}"> {{name}} </a>
     </li>
     {{/each}}
   </ul>
