@@ -8,7 +8,7 @@ Router.configure({
 });
 
 Router.route('/', {
-  template: 'main'
+  template: 'files'
 });
 
 Router.route('/demo', {

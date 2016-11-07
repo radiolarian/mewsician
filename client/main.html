@@ -8,8 +8,12 @@
 </body>
 
 <template name="main">
-  <h1>mewsician</h1>
-  <pre>by goacat</pre>
+  <h1>
+    <a href="/">mewsician</a>
+  </h1>
+
+  <p>by goacat</p>
+
   {{> loginButtons}}
   {{#if currentUser }}
   {{> yield}}
