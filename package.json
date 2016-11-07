@@ -5,6 +5,7 @@
     "start": "source .environment && meteor run"
   },
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "google-cloud": "^0.43.0",
     "meteor-node-stubs": "~0.2.0",
     "request": "^2.78.0"

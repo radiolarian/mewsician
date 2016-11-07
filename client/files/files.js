@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { Files } from '../../imports/files.js';
 import { Music } from '../../imports/music.js';
 
 // for the file listing template
@@ -7,9 +6,9 @@ import { Music } from '../../imports/music.js';
 Template.files.helpers({
   files() {
     // time sort the posts and then return
-    return Files.find({}, {sort: {time: -1}})
+    return Music.find({}, {sort: {time: -1}})
       .map( s => s );
-      //.map( s => new Date(s).toString() );
+    //.map( s => s.title );
   },
 });
 
@@ -29,9 +28,10 @@ Template.uploadForm.helpers({
 Template.uploadForm.events({
   'change #fileInput': function (e, template) {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
+
       // We upload only one file, in case
       // multiple files were selected
-      var upload = Images.insert({
+      var upload = Music.insert({
         file: e.currentTarget.files[0],
         streams: 'dynamic',
         chunkSize: 'dynamic'

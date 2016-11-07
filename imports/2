@@ -47,6 +47,7 @@ Router.map(function () {
       data.time = Date.now();
 
       //Music.insert(data);
+
       // respond saying successful post
       this.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
       this.response.end();

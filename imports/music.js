@@ -1,7 +1,7 @@
 // function split into import file for modularity
 
 import { FilesCollection } from 'meteor/ostrio:files';
-import { getReadableStream } from '../imports/getReadableStream';
+import { getReadableStream } from './getReadableStream';
 
 // from https://github.com/VeliovGroup/Meteor-Files/wiki/Google-Cloud-Storage-Integration
 

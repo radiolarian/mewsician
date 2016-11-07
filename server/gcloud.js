@@ -1,27 +1,27 @@
 // from https://github.com/VeliovGroup/Meteor-Files/wiki/Google-Cloud-Storage-Integration
 
+var Request = Npm.require('request');
+var gcloud = Npm.require('google-cloud')({
+  projectId: process.env.PROJECT_ID || 'meow',
+  keyFilename: Meteor.absolutePath + '/gcloud-secret.json'
+});
+
+var gcs = gcloud.storage();
+var bucket = gcs.bucket('mewsician');
+bucket.getMetadata((error, metadata, apiResponse) => {
+  if (error) console.error(error);
+});
+
+var bound = Meteor.bindEnvironment(callback => callback)
+
+
+// import the file collection for uploads
+
 import { Music } from '../imports/music.js';
-
-var gcloud, gcs, bucket, bucketMetadata, bound = {};
-gcloud = Npm.require('google-cloud')({
-  projectId: process.env.PROJECT_ID || 'meow', // <-- Replace this with your project ID
-  keyFilename: Meteor.absolutePath + '/gcloud-secret.json'  // <-- Replace this with the path to your key.json
-});
-
-gcs = gcloud.storage();
-bucket = gcs.bucket('mewsician'); // <-- Replace this with your bucket name
-bucket.getMetadata(function(error, metadata, apiResponse){
-  if (error) {
-    console.error(error);
-  }
-});
-Request = Npm.require('request');
-bound = Meteor.bindEnvironment(function(callback){
-  return callback();
-});
 
 
 // Intercept file's collection remove method to remove file from Google Cloud Storage
+
 var _origRemove = Music.remove;
 
 Music.remove = function(search) {
