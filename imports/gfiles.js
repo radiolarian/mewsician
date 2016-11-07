@@ -1,15 +1,17 @@
 // function split into import file for modularity
 
+import { FilesCollection } from 'meteor/ostrio:files';
 import { getReadableStream } from '../imports/getReadableStream';
 
 // from https://github.com/VeliovGroup/Meteor-Files/wiki/Google-Cloud-Storage-Integration
 
-Gfiles = new FilesCollection({
-  debug: true, // Set to true to enable debugging messages
+Music = new FilesCollection({
+  debug: true, // Set to true to enable debugging messages (todo: change to false)
   throttle: false,
-  storagePath: 'assets/app/uploads/uploadedFiles',
-  collectionName: 'uploadedFiles',
+  storagePath: 'assets/app/uploads/',
+  collectionName: 'music',
   allowClientCode: false,
+
   onAfterUpload: function(fileRef) {
     // In the onAfterUpload callback, we will move the file to Google Cloud Storage
     var self = this;
@@ -52,6 +54,7 @@ Gfiles = new FilesCollection({
       });
     });
   },
+
   interceptDownload: function(http, fileRef, version) {
     var path, ref, ref1, ref2;
     path = (ref= fileRef.versions) != null ? (ref1 = ref[version]) != null ? (ref2 = ref1.meta) != null ? ref2.pipePath : void 0 : void 0 : void 0;
@@ -70,4 +73,4 @@ Gfiles = new FilesCollection({
   }
 });
 
-export { Gfiles };
+export { Music };
