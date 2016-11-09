@@ -34,6 +34,15 @@ Music = new FilesCollection({
   collectionName: 'music',
   allowClientCode: false,
 
+  onBeforeUpload: function (file) {
+    // Allow upload files under 50MB, and only in audio formats [todo: select 1]
+    if (file.size <= 52428800 && /mp3|wav|wma|oggflac/i.test(file.extension)) {
+      return true;
+    } else {
+      return 'Please upload image, with size equal or less than 10MB';
+    }
+  },
+
   onAfterUpload: function(fileRef) {
     // In the onAfterUpload callback, we will move the file to Google Cloud Storage
     var self = this;
@@ -178,7 +187,7 @@ if (Meteor.isServer) {
   };
 
   // only show the files that they have uploaded for right now
-   Meteor.publish('files.music.all', function () {
+  Meteor.publish('files.music.all', function () {
     return Music.find({userId: this.userId}).cursor;
   });
 }
