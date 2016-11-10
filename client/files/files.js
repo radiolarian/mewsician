@@ -1,6 +1,4 @@
 import { Template } from 'meteor/templating';
-ChipAuth = new Mongo.Collection('chipauth');
-Meteor.subscribe("chipauth");
 
 // for the file listing template
 
@@ -10,7 +8,8 @@ Template.files.helpers({
   },
 
   link() {
-    return Music.findOne(this._id).link();
+    var file = Music.findOne(this._id);
+    if (file) return file.link()
   },
 
   apikey() {

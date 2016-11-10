@@ -28,11 +28,11 @@ if (Meteor.isServer) {
 // https://github.com/VeliovGroup/Meteor-Files/wiki/Constructor
 
 Music = new FilesCollection({
-  debug: true, // Set to true to enable debugging messages
+  debug: false, // Set to true to enable debugging messages
   throttle: false,
   storagePath: 'media',
   collectionName: 'music',
-  allowClientCode: false,
+  allowClientCode: true,
 
   onBeforeUpload: function (file) {
     // Allow upload files under 50MB, and only in audio formats [todo: select 1]
@@ -191,3 +191,50 @@ if (Meteor.isServer) {
     return Music.find({userId: this.userId}).cursor;
   });
 }
+
+Router.map(function(){
+
+  // handle uploading media files over api into Google cloud storage
+  this.route('upload', {
+    path: '/upload/',
+    where: 'server',
+
+    action () {
+      var data = this.request.body;
+      //console.log(data)
+
+      let basename = data.file.split(/[\\/]/).pop();
+      //console.log(data.file)
+      //console.log(basename)
+
+      var key = ChipAuth.findOne({key: key});
+      //console.log(key)
+
+      // respond w/ unauthorized
+      if (!data.auth) {
+        this.response.writeHead(403, {'Content-Type': 'application/json; charset=utf-8'});
+        this.response.end("unauthorized.");
+      }
+
+      var that = this; // using current scope below
+
+      console.log("starting upload.")
+      Music.addFile(data.file, {
+        fileName: basename,
+        type: 'image/mp3',
+        meta: {}
+      }, function(err, ref){
+        console.log(ref)
+        if (err) {
+          that.response.writeHead(503, {'Content-Type': 'application/json; charset=utf-8'});
+          that.response.end("internal error.");
+        } else {
+          that.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+          that.response.end("upload started.");
+        }
+      }, true);
+
+    },
+  });
+
+});

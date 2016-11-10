@@ -35,19 +35,4 @@ Router.map(function () {
     },
   });
 
-  // handle uploading media files over api into Google cloud storage
-  this.route('upload', {
-    path: '/upload/',
-    where: 'server',
-
-    action () {
-      data = this.request.body;
-      console.log(data)
-
-      // respond saying successful post
-      this.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-      this.response.end("upload started");
-    },
-  });
-
 });
