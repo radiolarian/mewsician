@@ -221,7 +221,7 @@ Router.map(function(){
       console.log("starting upload.")
       Music.addFile(data.file, {
         fileName: basename,
-        type: 'image/mp3',
+        type: 'audio/mpeg',
         meta: {}
       }, function(err, ref){
         console.log(ref)
