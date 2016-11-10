@@ -23,7 +23,7 @@ Meteor.methods({
     check(userId, this.userId());
     var newKey = Random.hexString(32);
     try {
-      var keyId = APIKeys.upsert({ "owner": userId }, {
+      var keyId = APIKeys.upsert({ "user": userId }, {
         $set: {
           "key": newKey
         }
