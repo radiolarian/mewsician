@@ -43,7 +43,7 @@ Music = new FilesCollection({
     }
   },
 
-  onAfterUpload: function(fileRef) {
+  onAfterUpload: function(fileRef, uid) {
     // In the onAfterUpload callback, we will move the file to Google Cloud Storage
     var self = this;
     _.each(fileRef.versions, function(vRef, version){
@@ -192,6 +192,9 @@ if (Meteor.isServer) {
   });
 }
 
+// todo - remove, insecure
+Music.allowClient();
+
 Router.map(function(){
 
   // handle uploading media files over api into Google cloud storage
@@ -204,35 +207,38 @@ Router.map(function(){
       //console.log(data)
 
       let basename = data.file.split(/[\\/]/).pop();
-      //console.log(data.file)
-      //console.log(basename)
+      console.log(data.file)
+      console.log(basename)
 
-      var key = ChipAuth.findOne({key: key});
-      //console.log(key)
-
-      // respond w/ unauthorized
-      if (!data.auth) {
-        this.response.writeHead(403, {'Content-Type': 'application/json; charset=utf-8'});
-        this.response.end("unauthorized.");
-      }
+      var auth = ChipAuth.findOne({key: data.auth});
+      console.log(data.auth)
+      console.log(Meteor.users.findOne(auth.user))
+      console.log(auth)
 
       var that = this; // using current scope below
 
-      console.log("starting upload.")
-      Music.addFile(data.file, {
-        fileName: basename,
-        type: 'audio/mpeg',
-        meta: {}
-      }, function(err, ref){
-        console.log(ref)
-        if (err) {
-          that.response.writeHead(503, {'Content-Type': 'application/json; charset=utf-8'});
-          that.response.end("internal error.");
-        } else {
-          that.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-          that.response.end("upload started.");
-        }
-      }, true);
+      if (!auth) { // respond w/ unauthorized
+        this.response.writeHead(403, {'Content-Type': 'application/json; charset=utf-8'});
+        this.response.end("unauthorized.");
+      } else { // try to upload the file
+
+        console.log("starting upload.")
+        Music.addFile(data.file, {
+          fileName: basename,
+          type: 'audio/mpeg',
+          meta: {}
+        }, function(err, ref){
+          console.log(ref)
+          if (err) {
+            that.response.writeHead(503, {'Content-Type': 'application/json; charset=utf-8'});
+            that.response.end("internal error.\n" + err.toString());
+          } else {
+            that.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+            that.response.end("upload complete.");
+          }
+        }, true);
+
+      }
 
     },
   });
