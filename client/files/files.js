@@ -12,6 +12,12 @@ Template.files.helpers({
   },
 });
 
+Template.files.events({
+  "click #generateKey": () => {
+    Meteor.call("gerenateApiKey", Meteor.userId);
+  },
+});
+
 // for the uploading form
 
 Template.uploadForm.onCreated(function() {

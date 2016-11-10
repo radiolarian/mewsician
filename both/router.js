@@ -17,6 +17,8 @@ Router.route('/demo', {
 // handle very simple post requests by dumping into posts mongo collection
 
 Router.map(function () {
+
+  // basic api demo to ensure the chip can work with our data
   this.route('demotime', {
     path: '/demotime/',
     where: 'server',
@@ -34,34 +36,18 @@ Router.map(function () {
   });
 
   // handle uploading media files over api into Google cloud storage
-  //this.route('upload', {
-  //path: '/upload/',
-  //where: 'server',
-
-  //action () {
-  //data = this.request.body;
-
-  //// respond saying successful post
-  //this.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-  //this.response.end();
-  //},
-  //});
-
-  // downloading your media
-  this.route('/media', {
-    path: '/cdn/storage/music/:_id/:_v/:_fname',
+  this.route('upload', {
+    path: '/upload/',
     where: 'server',
 
     action () {
       data = this.request.body;
       console.log(data)
 
-      // redirect to the real dl link
-      // todo!!!
-
       // respond saying successful post
       this.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-      this.response.end();
+      this.response.end("upload started");
     },
   });
+
 });
