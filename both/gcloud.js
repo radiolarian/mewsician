@@ -3,6 +3,7 @@
 import { Random } from 'meteor/random'
 import { FilesCollection } from 'meteor/ostrio:files';
 
+var __userid;
 var gcloud, gcs, bucket, bucketMetadata, Request, bound = {};
 
 if (Meteor.isServer) {
@@ -205,18 +206,19 @@ Router.map(function(){
 
     action () {
       var data = this.request.body;
+      //console.log(Music.insert)
       //console.log(data)
-      console.log(Music.insert)
 
       // todo - encode/decode URI components
       let basename = data.file.split(/[\\/]/).pop();
-      console.log(data.file)
-      console.log(basename)
+      //console.log(data.file)
+      //console.log(basename)
 
       var auth = ChipAuth.findOne({key: data.auth});
-      console.log(data.auth)
-      console.log(Meteor.users.findOne(auth.user))
-      console.log(auth)
+      __userId = auth.user; // rough validation, terrible global option
+      //console.log(Meteor.users.findOne(auth.user))
+      //console.log(data.auth)
+      //console.log(auth)
 
       var that = this; // using current scope below
 
@@ -229,7 +231,7 @@ Router.map(function(){
         Music.addFile(data.file, {
           fileName: basename,
           type: 'audio/mpeg',
-          meta: {}
+          meta: { uid: auth.user },
         }, function(err, ref){
           console.log(ref)
           if (err) {
