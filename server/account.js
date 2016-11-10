@@ -1,3 +1,27 @@
+// generating and updating keys for users
+// https://themeteorchef.com/recipes/writing-an-api/
+
+Meteor.methods({
+  regenerateKey(userId) {
+    if (!Meteor.users.findOne(userId))
+      return; // this isnt a real user
+
+    // generate a new auth key for user
+    var newKey = Random.hexString(32);
+
+    try {
+      var keyId = APIKeys.upsert({ "user": userId }, {
+        $set: {
+          "key": newKey
+        }
+      });
+      return keyId;
+    } catch(e) {
+      return e;
+    }
+  },
+});
+
 // Ensuring every user has an email address, should be in server-side code
 
 Accounts.validateNewUser((user) => {
@@ -13,24 +37,4 @@ Accounts.validateNewUser((user) => {
 
   // Return true to allow user creation to proceed
   return true;
-});
-
-// generating and updating keys for users
-// https://themeteorchef.com/recipes/writing-an-api/
-
-Meteor.methods({
-  regenerateApiKey(userId) {
-    check(userId, this.userId());
-    var newKey = Random.hexString(32);
-    try {
-      var keyId = APIKeys.upsert({ "user": userId }, {
-        $set: {
-          "key": newKey
-        }
-      });
-      return keyId;
-    } catch(e) {
-      return e;
-    }
-  },
 });

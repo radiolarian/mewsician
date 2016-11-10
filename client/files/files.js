@@ -1,5 +1,8 @@
 import { Template } from 'meteor/templating';
 
+APIKeys = Meteor.subscribe("apikeys");
+console.log(APIKeys)
+
 // for the file listing template
 
 Template.files.helpers({
@@ -10,11 +13,16 @@ Template.files.helpers({
   link() {
     return Music.findOne(this._id).link();
   },
+
+  apikey() {
+    let api = APIKeys.findOne()
+    if (api) return api.key;
+  },
 });
 
 Template.files.events({
-  "click #generateKey": () => {
-    Meteor.call("gerenateApiKey", Meteor.userId);
+  "click #regenerateKey": () => {
+    Meteor.call("regenerateKey", Meteor.userId());
   },
 });
 

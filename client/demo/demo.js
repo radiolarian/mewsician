@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 
-import { Posts } from '../../imports/posts.js';
+import { Posts } from '../../both/posts.js';
 
 Template.demo.helpers({
   posts() {
