@@ -28,7 +28,7 @@ if (Meteor.isServer) {
 // https://github.com/VeliovGroup/Meteor-Files/wiki/Constructor
 
 Music = new FilesCollection({
-  debug: false, // Set to true to enable debugging messages
+  debug: true, // Set to true to enable debugging messages
   throttle: false,
   storagePath: 'media',
   collectionName: 'music',
@@ -77,7 +77,8 @@ Music = new FilesCollection({
               } else {
                 // Unlink original files from FS
                 // after successful upload to Google Cloud Storage
-                self.unlink(self.collection.findOne(fileRef._id), version);
+                // todo - detect whether through api or not, then delete
+                //self.unlink(self.collection.findOne(fileRef._id), version);
               }
             });
           }
@@ -193,7 +194,7 @@ if (Meteor.isServer) {
 }
 
 // todo - remove, insecure
-Music.allowClient();
+//Music.allowClient();
 
 Router.map(function(){
 
@@ -205,7 +206,9 @@ Router.map(function(){
     action () {
       var data = this.request.body;
       //console.log(data)
+      console.log(Music.insert)
 
+      // todo - encode/decode URI components
       let basename = data.file.split(/[\\/]/).pop();
       console.log(data.file)
       console.log(basename)
