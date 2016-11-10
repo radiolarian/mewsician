@@ -2,15 +2,15 @@
 // https://themeteorchef.com/recipes/writing-an-api/
 
 Meteor.methods({
-  regenerateKey(userId) {
-    if (!Meteor.users.findOne(userId))
+  regenerateKey(uid) {
+    if (!Meteor.users.findOne(uid))
       return; // this isnt a real user
 
     // generate a new auth key for user
     var newKey = Random.hexString(32);
 
     try {
-      var keyId = APIKeys.upsert({ "user": userId }, {
+      var keyId = ChipAuth.upsert({ "user": uid }, {
         $set: {
           "key": newKey
         }

@@ -1,22 +1,16 @@
 // function split into import file for modularity
 
-import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 
 // code to run on server at startup
 
 Meteor.startup(() => {});
 
-// Hold generated user API keys for file upload
+// chip authentication code
 
-APIKeys = new Mongo.Collection('apikeys');
-  /* schema:
-   * - user
-   * - key
-   **/
+ChipAuth = new Mongo.Collection('chipauth');
 
-// publishing server data (authentication)
-
-Meteor.publish("apikeys", function(){
-  return APIKeys.find({user: this.userId})
+Meteor.publish("chipauth", function() {
+  return ChipAuth.find({user: this.userId})
 });

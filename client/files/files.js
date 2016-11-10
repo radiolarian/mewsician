@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
-
-APIKeys = Meteor.subscribe("apikeys");
-console.log(APIKeys)
+ChipAuth = new Mongo.Collection('chipauth');
+Meteor.subscribe("chipauth");
 
 // for the file listing template
 
@@ -15,7 +14,7 @@ Template.files.helpers({
   },
 
   apikey() {
-    let api = APIKeys.findOne()
+    var api = ChipAuth.findOne();
     if (api) return api.key;
   },
 });
