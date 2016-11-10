@@ -190,7 +190,13 @@ if (Meteor.isServer) {
 
   // only show the files that they have uploaded for right now
   Meteor.publish('files.music.all', function () { // two different for gui vs api uploads
-    return Music.find({ $or: [{userId: this.userId}, {meta.uid: this.userId}] }).cursor;
+    return Music.find({ $or:
+      [{
+        userId: this.userId
+      },{
+        "meta.uid": this.userId
+      }]
+    }).cursor;
   });
 }
 
