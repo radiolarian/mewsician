@@ -3,7 +3,7 @@
 import { Random } from 'meteor/random'
 import { FilesCollection } from 'meteor/ostrio:files';
 
-var __userid;
+var __userId;
 var gcloud, gcs, bucket, bucketMetadata, Request, bound = {};
 
 if (Meteor.isServer) {
@@ -212,8 +212,8 @@ Router.map(function(){
 
     action () {
       var data = this.request.body;
-      //console.log(Music.insert)
-      //console.log(data)
+      //console.log(Music)
+      console.log(data)
 
       // todo - encode/decode URI components
       let basename = data.file.split(/[\\/]/).pop();
