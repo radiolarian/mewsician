@@ -6,3 +6,131 @@
 
 body
     margin 2 em
+
+.audiojsZ
+  width 460px
+  height 36px
+  background #fa0000
+  overflow hidden
+  font-family monospace
+  font-size 12px
+  -webkit-box-shadow 1px 1px 8px rgba(0, 0, 0, 0.3)
+  -moz-box-shadow 1px 1px 8px rgba(0, 0, 0, 0.3)
+  -o-box-shadow 1px 1px 8px rgba(0, 0, 0, 0.3)
+  box-shadow 1px 1px 8px rgba(0, 0, 0, 0.3)
+  audio
+    position absolute
+    left -1px
+  .play-pauseZ
+    width 25px
+    height 40px
+    padding 4px 6px
+    margin 0px
+    float left
+    overflow hidden
+    border-right 1px solid #c00
+  p
+    display none
+    width 25px
+    height 40px
+    margin 0px
+    cursor pointer
+  .playZ
+    display block
+    background url('audiojs/player-graphics.gif') -2px -1px no-repeat
+  .scrubberZ
+    position relative
+    float left
+    width 280px
+    background #fcc
+    height 14px
+    margin 10px
+    border-left 0px
+    border-bottom 0px
+    overflow hidden
+  .progressZ
+    position absolute
+    top 0px
+    left 0px
+    height 14px
+    width 0px
+    background #600
+    z-index 1
+  .loadedZ
+    position absolute
+    top 0px
+    left 0px
+    height 14px
+    width 0px
+    background #c00
+  .timeZ
+    float left
+    height 36px
+    line-height 36px
+    margin 0px 0px 0px 6px
+    padding 0px 6px 0px 12px
+    border-left 1px solid #c00
+    color #600
+    text-shadow 1px 1px 0px rgba(125, 0, 0, 0.5)
+    em
+      padding 0px 2px 0px 0px
+      color #fcc
+      font-style normal
+    strong
+      padding 0px 0px 0px 2px
+      font-weight normal
+  .error-messageZ
+    float left
+    display none
+    margin 0px 10px
+    height 36px
+    width 400px
+    overflow hidden
+    line-height 36px
+    white-space nowrap
+    color #fff
+    text-overflow ellipsis
+    -o-text-overflow ellipsis
+    -icab-text-overflow ellipsis
+    -khtml-text-overflow ellipsis
+    -moz-text-overflow ellipsis
+    -webkit-text-overflow ellipsis
+    a
+      color #eee
+      text-decoration none
+      padding-bottom 1px
+      border-bottom 1px solid #999
+      white-space wrap
+  .loadingZ
+    background url('audiojs/player-graphics.gif') -2px -31px no-repeat
+  .errorZ
+    background url('audiojs/player-graphics.gif') -2px -61px no-repeat
+  .pauseZ
+    background url('audiojs/player-graphics.gif') -2px -91px no-repeat
+
+.playingZ .playZ, .playingZ .loadingZ, .playingZ .errorZ
+  display none
+
+.playingZ
+  .pauseZ
+    display block
+
+.loadingZ .playZ, .loadingZ .pauseZ, .loadingZ .errorZ
+  display none
+
+.loadingZ
+  .loadingZ
+    display block
+
+.errorZ .timeZ, .errorZ .playZ, .errorZ .pauseZ, .errorZ .scrubberZ, .errorZ .loadingZ
+  display none
+
+.errorZ
+  .errorZ
+    display block
+  .play-pauseZ
+    p
+      cursor auto
+  .error-messageZ
+    display block
+
