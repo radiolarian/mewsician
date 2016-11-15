@@ -40,6 +40,8 @@ Template.uploadForm.events({
   'change #fileInput': (e, template) => {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
 
+      console.log(e.currentTarget.files[0])
+
       // We upload only one file, in case
       // multiple files were selected
       var upload = Music.insert({

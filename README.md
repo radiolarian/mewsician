@@ -4,7 +4,7 @@ IDD fall 2016 final project by team goacat
 
 ### setup chip
 
-see [here]().
+see [here](https://github.com/jeremywrnr/mewsichip).
 
 ### setup meteor app (copy and paste all of this)
 
