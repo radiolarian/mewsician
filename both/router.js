@@ -114,7 +114,7 @@ Router.map(function() {
 // https://github.com/iron-meteor/iron-router/issues/909
 
 if (Meteor.isServer) {
-  var Busboy = Npm.require("Busboy"),
+  var Busboy = Npm.require("busboy"),
     fs = Npm.require("fs"),
     os = Npm.require("os"),
     path = Npm.require("path");
