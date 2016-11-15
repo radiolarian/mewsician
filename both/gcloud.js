@@ -3,7 +3,6 @@
 import { Random } from 'meteor/random'
 import { FilesCollection } from 'meteor/ostrio:files';
 
-var __userid;
 var gcloud, gcs, bucket, bucketMetadata, Request, bound = {};
 
 if (Meteor.isServer) {
@@ -37,7 +36,8 @@ Music = new FilesCollection({
 
   onBeforeUpload: function (file) {
     // Allow upload files under 50MB, and only in audio formats [todo: select 1]
-    if (file.size <= 52428800 && /mp3|wav|wma|oggflac/i.test(file.extension)) {
+    //if (file.size <= 52428800 && /mp3|wav|wma|oggflac/i.test(file.extension)) {
+    if (file.size <= 52428800) { // simplify for testing
       return true;
     } else {
       return 'Please upload image, with size equal or less than 10MB';
@@ -76,10 +76,8 @@ Music = new FilesCollection({
               if (error) {
                 console.error(error);
               } else {
-                // Unlink original files from FS
-                // after successful upload to Google Cloud Storage
-                // todo - detect whether through api or not, then delete
-                //self.unlink(self.collection.findOne(fileRef._id), version);
+                // Unlink original files from FS after successful upload to Google Cloud Storage
+                self.unlink(self.collection.findOne(fileRef._id), version);
               }
             });
           }
@@ -189,7 +187,8 @@ if (Meteor.isServer) {
   };
 
   // only show the files that they have uploaded for right now
-  Meteor.publish('files.music.all', function () { // two different for gui vs api uploads
+  Meteor.publish('files.music.all', function () {
+    // two different for gui vs api uploads
     return Music.find({ $or:
       [{
         userId: this.userId
@@ -199,59 +198,3 @@ if (Meteor.isServer) {
     }).cursor;
   });
 }
-
-// todo - remove, insecure
-//Music.allowClient();
-
-Router.map(function(){
-
-  // handle uploading media files over api into Google cloud storage
-  this.route('upload', {
-    path: '/upload/',
-    where: 'server',
-
-    action () {
-      var data = this.request.body;
-      //console.log(Music.insert)
-      //console.log(data)
-
-      // todo - encode/decode URI components
-      let basename = data.file.split(/[\\/]/).pop();
-      //console.log(data.file)
-      //console.log(basename)
-
-      var auth = ChipAuth.findOne({key: data.auth});
-      __userId = auth.user; // rough validation, terrible global option
-      //console.log(Meteor.users.findOne(auth.user))
-      //console.log(data.auth)
-      //console.log(auth)
-
-      var that = this; // using current scope below
-
-      if (!auth) { // respond w/ unauthorized
-        this.response.writeHead(403, {'Content-Type': 'application/json; charset=utf-8'});
-        this.response.end("unauthorized.");
-      } else { // try to upload the file
-
-        console.log("starting upload.")
-        Music.addFile(data.file, {
-          fileName: basename,
-          type: 'audio/mpeg',
-          meta: { uid: auth.user },
-        }, function(err, ref){
-          console.log(ref)
-          if (err) {
-            that.response.writeHead(503, {'Content-Type': 'application/json; charset=utf-8'});
-            that.response.end("internal error.\n" + err.toString());
-          } else {
-            that.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-            that.response.end("upload complete.");
-          }
-        }, true);
-
-      }
-
-    },
-  });
-
-});

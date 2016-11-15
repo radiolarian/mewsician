@@ -40,13 +40,18 @@ Template.uploadForm.events({
   'change #fileInput': (e, template) => {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
 
+      //console.log(e.currentTarget.files[0])
+
       // We upload only one file, in case
       // multiple files were selected
       var upload = Music.insert({
         file: e.currentTarget.files[0],
         chunkSize: 'dynamic',
         streams: 'dynamic',
-      }, false);
+        meta: {
+          uid: Meteor.userId(),
+          added: Date.now(),
+        }}, false);
 
       upload.on('start', function () {
         template.currentUpload.set(this);
