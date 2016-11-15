@@ -49,72 +49,66 @@ Router.map(function() {
 
     action () {
 
+      let tempfile = this.request.filenames.pop();
       // todo - encode/decode URI components of filenames
       // unsure if this actually needed in the short run
+      //console.log(this.request.filenames); // file
+      //console.log(this.request.body); // auth, name
 
-      console.log(this.request.filenames); // file
-      console.log(this.request.body.auth); // auth
+      var data = {
+        file: tempfile, // file object / upload location
+        base: tempfile.split(/[\\/]/).pop(), // basename
+        name: this.request.body.name,        // given file
+      };
 
-      //fn.split(/[\\/]/).pop()
-
-      var data = {}; // file + auth
-      var auth, file, user, upload;
-
-      if (!data) {
-        console.warn('no data given for upload.')
-        return this.next();
-      } else {
-        auth = ChipAuth.findOne({key: data.auth}); // userId of uploader
-        if (!auth) return this.next(); // not yet loaded
-        user = Meteor.users.findOne(auth.user); // account of uploader
-        file = data.file; // local FULL filepath to upload
-        //console.log(file)
-        //console.log(data)
-        //console.log(auth)
-        //console.log(user)
+      if (!data && data.file) {
+        var err = 'no data given for upload, missing file.';
+        this.response.writeHead(403, {'Content-Type': 'application/json; charset=utf-8'});
+        this.response.end(err);
+        console.warn(err)
       }
 
-      if (!user) {
-        console.warn("unauthorized.")
+      // authenticate the user from their api token
+
+      var user = {}, that = this;
+      user.auth = this.request.body.auth; // CHIP authentication key
+      user.id = ChipAuth.find({key: user.auth}).map( u => u.user )[0]; // uploader id
+      //user.prof = Meteor.users.findOne(user.chip.user); // account of uploader
+
+      if (!user.id) {
+        var err = "unauthorized.";
         this.response.writeHead(403, {'Content-Type': 'application/json; charset=utf-8'});
-        this.response.end("unauthorized.");
-      } else { // user authorized, upload
+        this.response.end(err);
+        console.warn(err);
+      } else {
 
-          /*
-        // We upload only one file, in case
-        // multiple files were selected
-        getFileObject(file, (f) => {
-          console.log(f)
+        // user authorized, start upload
 
-          upload = Music.insert({
-            file: f,
-            chunkSize: 'dynamic',
-            streams: 'dynamic',
-            meta: { uid: user._id },
-          }, false);
-
-          upload.on('start', function () {
-            console.log("starting api upload.")
-          });
-
-          upload.on('end', function (error, fileObj) {
-            if (error) {
-              alert('Error during upload: ' + error);
+        console.log("starting upload =====================")
+        console.log(data);
+        console.log(user);
+        Music.addFile(data.file, {
+          fileName: data.name,
+          type: 'audio/mpeg', // TODO - ways to dynamiclly infer this from the basename?
+          meta: {
+            added: Date.now(),
+            uid: user.id,
+          }}, function(err, ref){
+            //console.log(ref)
+            if (err) {
+              that.response.writeHead(503, {'Content-Type': 'application/json; charset=utf-8'});
+              that.response.end("internal error.\n" + err.toString());
             } else {
-              console.log('File "' + fileObj.name + '" successfully uploaded');
+              that.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+              that.response.end("upload complete.");
             }
-          });
-
-          upload.start(); // try uploading the file!
-        });
-           * */
+          }, true);
 
       }
     },
   });
 
 });
-
 
 // on the server, forward the form fields so files can be uploaded from the api
 // https://github.com/iron-meteor/iron-router/issues/909
@@ -151,6 +145,7 @@ if (Meteor.isServer) {
 
       // Pass request to busboy
       req.pipe(busboy);
+
     } else {
       next();
     }

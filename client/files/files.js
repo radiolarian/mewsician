@@ -48,7 +48,10 @@ Template.uploadForm.events({
         file: e.currentTarget.files[0],
         chunkSize: 'dynamic',
         streams: 'dynamic',
-      }, false);
+        meta: {
+          uid: Meteor.userId(),
+          added: Date.now(),
+        }}, false);
 
       upload.on('start', function () {
         template.currentUpload.set(this);

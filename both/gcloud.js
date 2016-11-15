@@ -76,10 +76,8 @@ Music = new FilesCollection({
               if (error) {
                 console.error(error);
               } else {
-                // Unlink original files from FS
-                // after successful upload to Google Cloud Storage
-                // todo - detect whether through api or not, then delete
-                //self.unlink(self.collection.findOne(fileRef._id), version);
+                // Unlink original files from FS after successful upload to Google Cloud Storage
+                self.unlink(self.collection.findOne(fileRef._id), version);
               }
             });
           }
@@ -189,7 +187,8 @@ if (Meteor.isServer) {
   };
 
   // only show the files that they have uploaded for right now
-  Meteor.publish('files.music.all', function () { // two different for gui vs api uploads
+  Meteor.publish('files.music.all', function () {
+    // two different for gui vs api uploads
     return Music.find({ $or:
       [{
         userId: this.userId
