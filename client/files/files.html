@@ -8,6 +8,7 @@
     <li>
       <b>{{ name }}</b>
       <!--- <a href="{{link}}?download=true" download="{{name}}" target="_blank" type="{{type}}">view</a>-->
+      hi ! link is {{link}}
       - <a href="{{link}}" target="_blank" type="{{type}}">view</a>
       - <i>{{ size }}b</i>
       <br/>
@@ -24,9 +25,8 @@
 </template>
 
 <template name="audioPlayer">
-
   <div class="audiojsZ">
-      <audio src="http://kolber.github.io/audiojs/demos/mp3/juicy.mp3" preload="auto"></audio>
+      <audio src="{{link}}" preload="auto"></audio>
       <div class="play-pauseZ">
         <p class="playZ"></p>
         <p class="pauseZ"></p>
@@ -43,8 +43,7 @@
       <div class="error-messageZ"></div>
     </div>
 
-
-  <b>hi??</b>
+  <b>link is {{link}}</b>
 </template>
 
 <template name="uploadForm">
