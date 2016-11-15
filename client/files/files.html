@@ -11,8 +11,8 @@
       - <a href="{{link}}" target="_blank" type="{{type}}">view</a>
       - <i>{{ size }}b</i>
       <br/>
-      <audio src="{{link}}" preload="auto" ></audio>
-
+      {{> audioPlayer}}
+      <br/>
     </li>
     {{/each}}
   </ul>
@@ -21,6 +21,30 @@
     <button id="regenerateKey" type="button">regenerate</button>
   </h3>
   <p> {{ apikey }} </p>
+</template>
+
+<template name="audioPlayer">
+
+  <div class="audiojsZ">
+      <audio src="http://kolber.github.io/audiojs/demos/mp3/juicy.mp3" preload="auto"></audio>
+      <div class="play-pauseZ">
+        <p class="playZ"></p>
+        <p class="pauseZ"></p>
+        <p class="loadingZ"></p>
+        <p class="errorZ"></p>
+      </div>
+      <div class="scrubberZ">
+        <div class="progressZ"></div>
+        <div class="loadedZ"></div>
+      </div>
+      <div class="timeZ">
+        <em class="playedZ">00:00</em>/<strong class="durationZ">00:00</strong>
+      </div>
+      <div class="error-messageZ"></div>
+    </div>
+
+
+  <b>hi??</b>
 </template>
 
 <template name="uploadForm">

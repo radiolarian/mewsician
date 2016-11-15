@@ -24,6 +24,34 @@ Template.files.events({
   },
 });
 
+Template.audioPlayer.onRendered(function() {
+  audiojs.events.ready(function() {
+    var as = audiojs.createAll();
+
+        var audios = document.getElementsByTagName('audio');
+
+        var a1 = audiojs.create(audios[0], {
+          css: false,
+          createPlayer: {
+            markup: false,
+            playPauseClass: 'play-pauseZ',
+            scrubberClass: 'scrubberZ',
+            progressClass: 'progressZ',
+            loaderClass: 'loadedZ',
+            timeClass: 'timeZ',
+            durationClass: 'durationZ',
+            playedClass: 'playedZ',
+            errorMessageClass: 'error-messageZ',
+            playingClass: 'playingZ',
+            loadingClass: 'loadingZ',
+            errorClass: 'errorZ'
+          }
+        });
+
+    console.log("init audiojs");
+  });
+});
+
 // for the uploading form
 
 Template.uploadForm.onCreated(function() {
