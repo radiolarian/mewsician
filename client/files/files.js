@@ -43,8 +43,12 @@ Template.file.onRendered(function() {
     if (file) link = file.link()
     var wavesurfer = WaveSurfer.create({
         container: '#'+this.data._id,
-        waveColor: 'violet',
-        progressColor: 'purple'
+        waveColor: '#c4c9cb',
+        cursorColor: '#c4c9cb',
+        progressColor: '#43cdf4',
+        hideScrollBar: true,
+        normalize: true,
+        barWidth: 1
       });
       wavesurfer.load(link);
       audioTracks[this.data._id] = wavesurfer;
