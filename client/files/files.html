@@ -1,47 +1,35 @@
 <template name="files">
-  <h3> upload here </h3>
-  {{> uploadForm}}
-
   <h3> your music </h3>
   <ul>
     {{#each files}}
-    <li>
-      <b>{{ name }}</b>
-      <!--- <a href="{{link}}?download=true" download="{{name}}" target="_blank" type="{{type}}">view</a>-->
-      - <a href="{{link}}" target="_blank" type="{{type}}">view</a>
-      - <i>{{ size }}b</i>
-      <br/>
-      {{> audioPlayer}}
-      <br/>
-    </li>
+    {{> file}}
     {{/each}}
   </ul>
+
+<p><label><input type="checkbox" name="debug" value="debug">   Show debugging tools?</label></p>
+
+<div class="debugging">
+  <h3> upload here </h3>
+  {{> uploadForm}}
 
   <h3> chip auth
     <button id="regenerateKey" type="button">regenerate</button>
   </h3>
   <p> {{ apikey }} </p>
+</div>
 </template>
 
-<template name="audioPlayer">
-  <div class="audiojsZ">
-      <audio src="{{link}}" preload="auto"></audio>
-      <div class="play-pauseZ">
-        <p class="playZ"></p>
-        <p class="pauseZ"></p>
-        <p class="loadingZ"></p>
-        <p class="errorZ"></p>
-      </div>
-      <div class="scrubberZ">
-        <div class="progressZ"></div>
-        <div class="loadedZ"></div>
-      </div>
-      <div class="timeZ">
-        <em class="playedZ">00:00</em>/<strong class="durationZ">00:00</strong>
-      </div>
-      <div class="error-messageZ"></div>
-    </div>
-
+<template name="file">
+  <li>
+      <b>{{ name }}</b>
+      <!--- <a href="{{link}}?download=true" download="{{name}}" target="_blank" type="{{type}}">view</a>-->
+      - <a href="{{link}}" target="_blank" type="{{type}}">view</a>
+      - <i>{{ size }}b</i>
+      <br/>
+      <div id="{{_id}}"></div>
+      link is {{ link }}
+      <br/>
+  </li>
 </template>
 
 <template name="uploadForm">

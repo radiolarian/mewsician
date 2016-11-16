@@ -28,7 +28,7 @@ if (Meteor.isServer) {
 // https://github.com/VeliovGroup/Meteor-Files/wiki/Constructor
 
 Music = new FilesCollection({
-  debug: true, // Set to true to enable debugging messages
+  debug: false, // Set to true to enable debugging messages
   throttle: false,
   storagePath: 'media',
   collectionName: 'music',
