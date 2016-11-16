@@ -1,5 +1,7 @@
 import { Template } from 'meteor/templating';
 
+var audioTracks = {};
+
 // for the file listing template
 
 Meteor.startup(function () {
@@ -29,6 +31,8 @@ Template.file.helpers({
     var api = ChipAuth.findOne();
     if (api) return api.key;
   }
+
+
 });
 
 Template.file.onRendered(function() {
@@ -43,7 +47,16 @@ Template.file.onRendered(function() {
         progressColor: 'purple'
       });
       wavesurfer.load(link);
+      audioTracks[this.data._id] = wavesurfer;
 
+});
+
+Template.file.events({
+  'click .playbutton': function(e) { 
+      console.log("this is ", this._id); 
+      console.log(audioTracks);
+      audioTracks[this._id].playPause();
+  }
 });
 
 Template.files.events({
