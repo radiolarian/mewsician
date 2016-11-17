@@ -37,14 +37,6 @@ Template.file.helpers({
   }
 });
 
-Template.file.events({
-  "click .delete": (e) => {
-    console.log("clicked", e);
-    console.log("clicked", id);
-    Meteor.call("removeFile", id);
-  },
-});
-
 Template.file.onRendered(function() {
   var link;
   var file = Music.findOne(this.data._id);
@@ -75,6 +67,10 @@ Template.file.events({
     im = document.getElementById(this._id+"-button");
     if (im.src.includes("images/play.png")) im.src = "images/pause.png";
     else im.src = "images/play.png";
+  },
+
+  "click .delete": function(e) {
+    Meteor.call("removeFile", this._id);
   },
 });
 
