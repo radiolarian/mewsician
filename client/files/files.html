@@ -6,29 +6,30 @@
     {{/each}}
   </ul>
 
-<p><label><input type="checkbox" name="debug" value="debug">   Show debugging tools?</label></p>
+  <p><label><input type="checkbox" name="debug" value="debug">   Show debugging tools?</label></p>
 
-<div class="debugging">
-  <h3> upload here </h3>
-  {{> uploadForm}}
+  <div class="debugging">
+    <h3> upload here </h3>
+    {{> uploadForm}}
 
-  <h3> chip auth
-    <button id="regenerateKey" type="button">regenerate</button>
-  </h3>
-  <p> {{ apikey }} </p>
-</div>
+    <h3> chip auth
+      <button id="regenerateKey" type="button">regenerate</button>
+    </h3>
+    <p> {{ apikey }} </p>
+  </div>
 </template>
 
 <template name="file">
   <li>
-      <b>{{ name }}</b>
-      <!--- <a href="{{link}}?download=true" download="{{name}}" target="_blank" type="{{type}}">view</a>-->
-      - <a href="{{link}}" target="_blank" type="{{type}}">view</a>
-      - <i>{{ size }}b</i>
-      <br/>
-      <input type="image" src="images/play.png" id="{{_id}}-button" class="playbutton">
-      <div id="{{_id}}" class="audiocontainer"></div>
-      <br/>
+    <b>{{ name }}</b>
+    <!--- <a href="{{link}}?download=true" download="{{name}}" target="_blank" type="{{type}}">view</a>-->
+    - <a href="{{link}}" target="_blank" type="{{type}}">view</a>
+    - <a href="#" id="{{_id}}-play" class="delete">delete</a>
+    - <i>{{ size }}b</i>
+    <br/>
+    <input type="image" src="images/play.png" id="{{_id}}-button" class="playbutton">
+    <div id="{{_id}}" class="audiocontainer"></div>
+    <br/>
   </li>
 </template>
 
