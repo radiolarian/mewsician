@@ -6,17 +6,17 @@
     {{/each}}
   </ul>
 
-<p><label><input type="checkbox" name="debug" value="debug">   Show debugging tools?</label></p>
+  <p><label><input type="checkbox" name="debug" value="debug">   Show debugging tools?</label></p>
 
-<div class="debugging">
-  <h3> upload here </h3>
-  {{> uploadForm}}
+  <div class="debugging">
+    <h3> upload here </h3>
+    {{> uploadForm}}
 
-  <h3> chip auth
-    <button id="regenerateKey" type="button">regenerate</button>
-  </h3>
-  <p> {{ apikey }} </p>
-</div>
+    <h3> chip auth
+      <button id="regenerateKey" type="button">regenerate</button>
+    </h3>
+    <p> {{ apikey }} </p>
+  </div>
 </template>
 
 <template name="file">
