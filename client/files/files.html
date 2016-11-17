@@ -1,4 +1,5 @@
 <template name="files">
+  {{> navbar}}
   <h3> your music </h3>
   <ul>
     {{#each files}}
@@ -26,10 +27,14 @@
       - <a href="{{link}}" target="_blank" type="{{type}}">view</a>
       - <i>{{ size }}b</i>
       <br/>
-      <button id="{{_id}}-button" class="playbutton">play</button>
+      <input type="image" src="images/play.png" id="{{_id}}-button" class="playbutton">
       <div id="{{_id}}" class="audiocontainer"></div>
       <br/>
   </li>
+</template>
+
+<template name="navbar">
+  <img src="images/recordings.gif">
 </template>
 
 <template name="uploadForm">

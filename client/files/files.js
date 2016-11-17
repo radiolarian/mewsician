@@ -57,9 +57,10 @@ Template.file.onRendered(function() {
 
 Template.file.events({
   'click .playbutton': function(e) { 
-      console.log("this is ", this._id); 
-      console.log(audioTracks);
       audioTracks[this._id].playPause();
+      im = document.getElementById(this._id+"-button");
+      if (im.src.includes("images/play.png")) im.src = "images/pause.png"
+      else im.src = "images/play.png" 
   }
 });
 
