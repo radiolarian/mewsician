@@ -63,6 +63,10 @@ Template.file.onRendered(function() {
   wavesurfer.load(link);
   audioTracks[this.data._id] = wavesurfer;
 
+  $('.ui.dropdown')
+    .dropdown()
+  ;
+
 });
 
 Template.file.events({
