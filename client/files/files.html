@@ -1,5 +1,4 @@
 <template name="files">
-  {{> navbar}}
   <h3> your music </h3>
   <ul>
     {{#each files}}
@@ -33,9 +32,6 @@
   </li>
 </template>
 
-<template name="navbar">
-  <img src="images/recordings.gif">
-</template>
 
 <template name="uploadForm">
   {{#with currentUpload}}
