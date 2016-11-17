@@ -19,7 +19,12 @@ Template.files.events({
 Template.files.helpers({
   files() {
     return Music.find({});
-  }
+  },
+
+  apikey() {
+    var api = ChipAuth.findOne();
+    if (api) return api.key;
+  },
 });
 
 
@@ -30,11 +35,6 @@ Template.file.helpers({
     var file = Music.findOne(this._id);
     if (file) return file.link()
   },
-
-  apikey() {
-    var api = ChipAuth.findOne();
-    if (api) return api.key;
-  }
 });
 
 Template.file.onRendered(function() {

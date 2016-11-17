@@ -1,6 +1,3 @@
-// generating and updating keys for users
-// https://themeteorchef.com/recipes/writing-an-api/
-
 // Ensuring every user has an email address, should be in server-side code
 
 Accounts.validateNewUser((user) => {
