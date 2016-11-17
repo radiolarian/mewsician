@@ -75,49 +75,50 @@ Template.file.events({
     im = document.getElementById(this._id+"-button");
     if (im.src.includes("images/play.png")) im.src = "images/pause.png";
     else im.src = "images/play.png";
-  }});
+  },
+});
 
 
-  // for the uploading form to google cloud
+// for the uploading form to google cloud
 
-  Template.uploadForm.onCreated(function() {
-    this.currentUpload = new ReactiveVar(false);
-  });
+Template.uploadForm.onCreated(function() {
+  this.currentUpload = new ReactiveVar(false);
+});
 
-  Template.uploadForm.helpers({
-    currentUpload() {
-      return Template.instance().currentUpload.get();
-    },
-  });
+Template.uploadForm.helpers({
+  currentUpload() {
+    return Template.instance().currentUpload.get();
+  },
+});
 
-  Template.uploadForm.events({
-    'change #fileInput': (e, template) => {
-      if (e.currentTarget.files && e.currentTarget.files[0]) {
+Template.uploadForm.events({
+  'change #fileInput': (e, template) => {
+    if (e.currentTarget.files && e.currentTarget.files[0]) {
 
-        // We upload only one file, in case multiple files were selected
-        var upload = Music.insert({
-          file: e.currentTarget.files[0],
-          chunkSize: 'dynamic',
-          streams: 'dynamic',
-          meta: {
-            uid: Meteor.userId(),
-            added: Date.now(),
-          }}, false);
+      // We upload only one file, in case multiple files were selected
+      var upload = Music.insert({
+        file: e.currentTarget.files[0],
+        chunkSize: 'dynamic',
+        streams: 'dynamic',
+        meta: {
+          uid: Meteor.userId(),
+          added: Date.now(),
+        }}, false);
 
-        upload.on('start', function () {
-          template.currentUpload.set(this);
-        });
+      upload.on('start', function () {
+        template.currentUpload.set(this);
+      });
 
-        upload.on('end', function (error, fileObj) {
-          if (error) {
-            alert('Error during upload: ' + error);
-          } else {
-            console.log('File "' + fileObj.name + '" successfully uploaded');
-          }
-          template.currentUpload.set(false);
-        });
+      upload.on('end', function (error, fileObj) {
+        if (error) {
+          alert('Error during upload: ' + error);
+        } else {
+          console.log('File "' + fileObj.name + '" successfully uploaded');
+        }
+        template.currentUpload.set(false);
+      });
 
-        upload.start();
-      }
+      upload.start();
     }
-  });
+  }
+});
