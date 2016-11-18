@@ -8,7 +8,7 @@ var gcloud, gcs, bucket, bucketMetadata, Request, bound = {};
 if (Meteor.isServer) {
   gcloud = Npm.require('google-cloud')({
     projectId: 'mewsician-148407',
-    keyFilename: Meteor.absolutePath + '/gcloud-secret.json'
+    keyFilename: Meteor.absolutePath + '/private/gcloud-secret.json'
   });
 
   let inDevelopment = process.env.NODE_ENV === "development";
