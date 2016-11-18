@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# export keypass for production
+export "KEYPASS=$(cat $1/KEYPASS)"
+echo "KEYPASS EXPORTED =========="
+make decrypt # get auth keys
