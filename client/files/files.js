@@ -35,13 +35,16 @@ Template.file.helpers({
     var file = Music.findOne(this._id);
     if (file) return file.link()
   },
+
+  date() {
+    var date = new Date(this.meta.added);
+    return date.toLocaleString();
+  },
 });
 
 Template.file.onRendered(function() {
   var link;
   var file = Music.findOne(this.data._id);
-  console.log("this is ", this);
-  console.log("id is ", this.data._id);
   if (file) link = file.link()
   var wavesurfer = WaveSurfer.create({
     container: '#'+this.data._id,
