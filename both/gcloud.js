@@ -11,13 +11,16 @@ if (Meteor.isServer) {
     keyFilename: Meteor.absolutePath + '/gcloud-secret.json'
   });
 
+  let inDevelopment = process.env.NODE_ENV === "development";
+  let bucketName = inDevelopment?
+    "staging.mewsician-148407.appspot.com":
+    "mewsician-148407.appspot.com";
   gcs = gcloud.storage();
-  bucket = gcs.bucket('mewsician-148407.appspot.com');
+  bucket = gcs.bucket(bucketName);
   bucket.getMetadata(function(error, metadata, apiResponse){
-    if (error) {
-      console.error(error);
-    }
+    if (error) console.error(error);
   });
+
   Request = Npm.require('request');
   bound = Meteor.bindEnvironment(function(callback){
     return callback();
