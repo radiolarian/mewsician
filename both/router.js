@@ -38,6 +38,8 @@ Router.map(function () {
 });
 
 // mapping the client route to upload a file automatically.
+// this is for handling incoming files from CURL (on CHIP)
+// the file data is included using curl's form (-F) fields.
 
 Router.map(function() {
 
@@ -104,7 +106,7 @@ Router.map(function() {
             }
           }, true);
 
-      }
+      },
     },
   });
 

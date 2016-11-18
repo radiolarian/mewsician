@@ -31,11 +31,11 @@ if (Meteor.isServer) {
 // https://github.com/VeliovGroup/Meteor-Files/wiki/Constructor
 
 Music = new FilesCollection({
-  debug: false, // Set to true to enable debugging messages
+  debug: true, // Set to true to enable debugging messages
   throttle: false,
-  storagePath: 'media',
+  storagePath: 'uploads',
   collectionName: 'music',
-  allowClientCode: true,
+  allowClientCode: false,
 
   onBeforeUpload: function (file) {
     // Allow upload files under 50MB, and only in audio formats [todo: select 1]
@@ -43,7 +43,7 @@ Music = new FilesCollection({
     if (file.size <= 52428800) { // simplify for testing
       return true;
     } else {
-      return 'Please upload image, with size equal or less than 10MB';
+      return 'Please upload image, with size equal or less than 50MB';
     }
   },
 
@@ -56,6 +56,7 @@ Music = new FilesCollection({
       // As after viewing this code it will be easy
       // to get access to unlisted and protected files
       var filePath = (Random.id()) + "-" + version + "." + fileRef.extension;
+
       // Here we set the neccesary options to upload the file, for more options, see
       // https://googlecloudplatform.github.io/gcloud-node/#/docs/v0.36.0/storage/bucket?method=upload
       var options = {
@@ -80,6 +81,9 @@ Music = new FilesCollection({
                 console.error(error);
               } else {
                 // Unlink original files from FS after successful upload to Google Cloud Storage
+                // TODO is this deleting the original for some reason??? why?????
+                // maybe after it gets uploaded it deletes it?? but why is it
+                // not still in google cloud then. hmmmmmmmm hm hm hm.
                 self.unlink(self.collection.findOne(fileRef._id), version);
               }
             });
@@ -91,7 +95,7 @@ Music = new FilesCollection({
 
   interceptDownload: function(http, fileRef, version) {
     var self = this;
-    var path, ref, ref1, ref2;
+    var path, ref, ref1, ref2; // TODO figure out what is going on here...
     path = (ref= fileRef.versions) != null ? (ref1 = ref[version]) != null ? (ref2 = ref1.meta) != null ? ref2.pipePath : void 0 : void 0 : void 0;
     var vRef = ref1;
     if (path) {

@@ -91,7 +91,7 @@ Template.uploadForm.helpers({
 });
 
 Template.uploadForm.events({
-  'change #fileInput': (e, template) => {
+  'change #fileInput': function (e, template) {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
 
       // We upload only one file, in case multiple files were selected
