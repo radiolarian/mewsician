@@ -171,26 +171,15 @@ function getReadableStream(http, path, vRef){
 
 if (Meteor.isServer) {
   // Intercept file's collection remove method to remove file from Google Cloud Storage
-  var _origRemove = Music.remove;
-
-  Music.remove = function(search) {
-    var cursor = this.collection.find(search);
-    cursor.forEach(function(fileRef) {
-      _.each(fileRef.versions, function(vRef) {
-        var ref;
-        if (vRef != null ? (ref = vRef.meta) != null ? ref.pipePath : void 0 : void 0) {
-          bucket.deleteFiles(vRef.meta.pipePath, function(error) {
-            bound(function() {
-              if (error) {
-                console.error(error);
-              }
-            });
-          });
-        }
-      });
-    });
-    // Call the original removal method
-    _origRemove.call(this, search);
+  Music.deCloud = function (id) { // call original remove with our id
+    let err = function(e) { if (e) console.error(e) }
+    try { // delete from google cloud
+      let fileRef = Music.findOne(id);
+      console.log(fileRef) // we only ever use the original version
+      bucket.deleteFiles(fileRef.versions.original.meta.pipePath, err);
+    } catch (e) {
+      err(e)
+    }
   };
 
   // only show the files that they have uploaded for right now

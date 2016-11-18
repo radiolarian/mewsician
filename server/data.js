@@ -2,8 +2,10 @@
 
 Meteor.methods({
   removeFile(id) {
-    var file = Music.findOne(id);
-    if (file) Music.remove({_id: id});
+    if (Music.findOne(id)) {
+      //Music.deCloud(id); // for some reason this deletes all data in the database, which is not good.
+      Music.remove(id);
+    }
   },
 
   // generating and updating keys for users
@@ -16,11 +18,11 @@ Meteor.methods({
     var newKey = Random.hexString(32);
 
     try {
-      var keyId = ChipAuth.upsert({ "user": uid }, {
-        $set: {
-          "key": newKey
-        }
-      });
+      var keyId = ChipAuth.upsert(
+        { "user": uid },
+        { $set: { "key": newKey } }
+      );
+
       return keyId;
     } catch(e) {
       return e;

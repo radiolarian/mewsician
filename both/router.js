@@ -17,12 +17,10 @@ Router.route('/demo', {
 // handle very simple post requests by dumping into posts mongo collection
 
 Router.map(function () {
-
   // basic api demo to ensure the chip can work with our data
   this.route('demotime', {
     path: '/demotime/',
     where: 'server',
-
     action () {
       // time stamp all incoming data
       data = this.request.body;
@@ -35,32 +33,19 @@ Router.map(function () {
     },
   });
 
-});
-
-// mapping the client route to upload a file automatically.
-// this is for handling incoming files from CURL (on CHIP)
-// the file data is included using curl's form (-F) fields.
-
-Router.map(function() {
-
+  // mapping the client route to upload a file automatically.
+  // this is for handling incoming files from CURL (on CHIP)
+  // the file data is included using curl's form (-F) fields.
   // handle uploading media files over api into Google cloud storage
   // need to use client API since Music.insert only exposed there.
   this.route('upload', {
     path: '/upload/',
     where: 'server',
-
     action () {
-
       let tempfile = this.request.filenames.pop();
-      // todo - encode/decode URI components of filenames
-      // unsure if this actually needed in the short run
-      //console.log(this.request.filenames); // file
-      //console.log(this.request.body); // auth, name
-
       var data = {
         file: tempfile, // file object / upload location
         base: tempfile.split(/[\\/]/).pop(), // basename
-        name: this.request.body.name,        // given file
       };
 
       if (!data && data.file) {
@@ -86,7 +71,7 @@ Router.map(function() {
 
         // user authorized, start upload
 
-        console.log("starting upload =====================")
+        console.log("Starting CURL upload =====================>")
         console.log(data);
         console.log(user);
         Music.addFile(data.file, {
@@ -105,12 +90,9 @@ Router.map(function() {
               that.response.end("upload complete.");
             }
           }, true);
-
-      },
-    },
-  });
-
+      }}});
 });
+
 
 // on the server, forward the form fields so files can be uploaded from the api
 // https://github.com/iron-meteor/iron-router/issues/909
@@ -126,7 +108,6 @@ if (Meteor.isServer) {
 
     // initialize body request
     req.body = req.body || {};
-
     if (req.method === "POST") {
       var busboy = new Busboy({ headers: req.headers });
       busboy.on("file", function (fieldname, file, filename, encoding, mimetype) {
@@ -135,18 +116,10 @@ if (Meteor.isServer) {
         filenames.push(saveTo);
       });
 
-      busboy.on("field", function(fieldname, value) {
-        req.body[fieldname] = value;
-      });
-
-      busboy.on("finish", function () {
-        // Pass filenames to request
-        req.filenames = filenames;
-        next();
-      });
-
-      // Pass request to busboy
-      req.pipe(busboy);
+      // Pass filenames to request
+      busboy.on("field", function(fieldname, value) { req.body[fieldname] = value; });
+      busboy.on("finish", function () { req.filenames = filenames; next(); });
+      req.pipe(busboy); // Pass request to busboy
 
     } else {
       next();
