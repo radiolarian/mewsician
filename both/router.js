@@ -14,7 +14,7 @@ Router.route('/demo', {
   template: 'demo'
 });
 
-Router.route('/mymewsician', {
+Router.route('/dress', {
   template: 'decorate'
 });
 
