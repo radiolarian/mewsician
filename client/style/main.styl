@@ -37,11 +37,16 @@ h1
 .navbutton
 	width 100px !important
 	box-shadow none !important
+	border none !important
 	background none !important
 	margin-right 2em !important
 
 #navbar
 	white-space nowrap
+	border none !important
+	box-shadow none !important
+	margin-top -14px
+	margin-left -14px
 
 .helper
   display inline-block
@@ -49,12 +54,12 @@ h1
   vertical-align middle
 
 #main-content
-	padding-top 105px
+	padding 0
 
 .navbar-login
 	position absolute
-	right 25px
-	top 10px
+	right 45px
+	top 25px
 
 #login-dropdown-list
 	top 30px !important
@@ -98,6 +103,7 @@ h1
   visibility: hidden; /* Makes input not-clickable */
   position: absolute; /* Remove input from document flow */
 }
-
+.ui.menu .item:before 
+	width 0px
 .rad > input + img
   cursor pointer

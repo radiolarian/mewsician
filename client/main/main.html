@@ -32,6 +32,38 @@
 
 
 <template name="navbar">
+	<div class="ui menu" id="navbar">
+	  <div class="header item">
+			<a href="#"><span class="helper"></span><img class="logo vcenter-align" src="images/logo.png" onmouseover="this.src='images/logo.gif'" onmouseout="this.src='images/logo.png'" /></a>
+	  </div>
+  			<div class="navbutton ui card">
+	        <div class="image navbutton center aligned">
+		        <a href="#"><img class="navpic" src="images/recordings.png" onmouseover="this.src='images/recordings-hover.png'" onmouseout="this.src='images/recordings.png'" /></a>
+	        </div>
+	        <div class="description center aligned"><a href="#">My Mewsic</a></div>
+        </div>
+        <div class="navbutton ui card">
+	        <div class="image navbutton center aligned">
+						<a href="#"><img class="navpic" src="images/mail.png" onmouseover="this.src='images/mail-hover.png'" onmouseout="this.src='images/mail.png'" /></a>
+	        </div>
+	        <div class="description center aligned"><a href="#">My Mewsages</a></div>
+        </div>	  
+	
+        <div class="navbutton ui card">
+	        <div class="image navbutton center aligned">
+						<a href="#"><img class="navpic" src="images/mewsician.png" onmouseover="this.src='images/mewsician-hover.png'" onmouseout="this.src='images/mewsician.png'" /></a>
+	        </div>
+	        <div class="description center aligned"><a href="#">My Mewsician</a></div>
+        </div>
+
+     <div class="right menu">
+			  <span class="helper"></span><div class="navbar-login right aligned">Hello, <br/>
+			  {{> loginButtons}}!</div> 
+	   </div>
+
+	</div>
+
+<!-- 
 	<div class="ui grid">
     <div class="computer tablet only row">
       <div class="ui fixed menu navbar page grid" id="navbar">
@@ -64,6 +96,6 @@
 
       </div>
     </div>
-  </div>
+  </div> -->
 
 </template>
