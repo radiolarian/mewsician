@@ -14,6 +14,11 @@ Router.route('/demo', {
   template: 'demo'
 });
 
+Router.route('/mymewsician', {
+  template: 'decorate'
+});
+
+
 // handle very simple post requests by dumping into posts mongo collection
 
 Router.map(function () {
