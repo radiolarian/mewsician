@@ -1,6 +1,8 @@
 # mewsician
 
-IDD fall 2016 final project by team goacat
+IDD fall 2016 final project
+
+**by team goacat**
 
 ### setup chip
 
