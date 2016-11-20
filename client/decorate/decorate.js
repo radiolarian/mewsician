@@ -48,7 +48,13 @@ interact('.draggable')
   // this is used later in the resizing and gesture demos
   window.dragMoveListener = dragMoveListener;
 
-
+  //stats stuff
+	$('#health').progress({
+	  percent: 82
+	});
+	$('#experience').progress({
+	  percent: 42
+	});
 });
 
 Template.decorate.events({

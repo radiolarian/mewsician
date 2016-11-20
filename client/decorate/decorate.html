@@ -1,29 +1,66 @@
 <template name="decorate">
-<div id="mewsician-canvas">
-<img id="catbg" src="images/decorate/bg1.png">
-<img id="cat" src="images/decorate/mewsician-large.png">
-</div>
 
-<img src="images/decorate/hat.png" class="draggable">
-<img src="images/decorate/monocle.png" class="draggable">
-<img src="images/decorate/sunglasses.png" class="draggable">
-<img src="images/decorate/whiskers.png" class="draggable">
-<br/><br/>
-<div class="locked-container"><img class="lock-im" src="images/decorate/head1.png"><img src="images/decorate/lock.png" class="lock"></div>
-<div class="locked-container"><img class="lock-im" src="images/decorate/head2.png"><img src="images/decorate/lock.png" class="lock"></div>
-<div class="locked-container"><img class="lock-im" src="images/decorate/head3.png"><img src="images/decorate/lock.png" class="lock"></div>
-<br/><br/>
-<label class="rad">
-  <input type="radio" name="bg" value="bg1" checked="checked"/>
-  <img src="images/decorate/bg1.png" class="thumbnail">
-</label>
-<label class="rad">
-  <input type="radio" name="bg" value="bg2" />
-  <img src="images/decorate/bg2.png" class="thumbnail">
-</label>
-<label class="rad">
-  <input type="radio" name="bg" value="bg3" />
-  <img src="images/decorate/bg3.png" class="thumbnail">
-</label>
+  <div class="ui column grid">
+    <div class="row">
+      <div class="four wide column ">
+        {{> stats}}
+      </div>
+      <div class="ten wide column">
+        <div id="mewsician-canvas">
+          <img id="catbg" class="bg-im decoration" src="images/decorate/bg1.png">
+          <img id="cat" src="images/decorate/mewsician-large.png">
+        </div>
+      </div>     
+    </div>
+  </div>
 
+
+
+
+<h4>Level 1</h4>
+    <img src="images/decorate/hat.png" class="draggable"> 
+    <img src="images/decorate/monocle.png" class="draggable"> 
+    <img src="images/decorate/sunglasses.png" class="draggable"> 
+    <img src="images/decorate/whiskers.png" class="draggable">
+    <br/><br/>
+<h4>Level 2</h4>
+    <div class="locked-container"><img class="lock-im" src="images/decorate/head1.png"><img src="images/decorate/lock.png" class="lock"></div> 
+    <div class="locked-container"><img class="lock-im" src="images/decorate/head2.png"><img src="images/decorate/lock.png" class="lock"></div> 
+    <div class="locked-container"><img class="lock-im" src="images/decorate/head3.png"><img src="images/decorate/lock.png" class="lock"></div>
+    <br/><br/>
+<h4>Backgrounds</h4>
+    <label class="rad">
+      <input type="radio" name="bg" value="bg1" checked="checked"/>
+      <img src="images/decorate/bg1.png" class="thumbnail">
+    </label>
+    <label class="rad">
+      <input type="radio" name="bg" value="bg2" />
+      <img src="images/decorate/bg2.png" class="thumbnail">
+    </label>
+    <label class="rad">
+      <input type="radio" name="bg" value="bg3" />
+      <img src="images/decorate/bg3.png" class="thumbnail">
+    </label>
+</template>
+
+
+
+<template name="stats">
+<!-- TODO: don't hardcode this -->
+  <div class="stats">
+    <h4>Name</h4>
+    <div class="ui massive transparent input">
+       <input type="text" placeholder="Mewsician">
+    </div>
+    <h4>Health</h4>
+    <div class="ui green progress" id="health">
+      <div class="bar"></div>
+    </div>
+    <h4>Experience</h4>
+    <div class="ui teal progress" id="experience">
+      <div class="bar"></div>
+      <div class="label left">13 min to Level 2</div>
+    </div>
+
+  </div>
 </template>
