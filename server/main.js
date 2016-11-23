@@ -14,3 +14,12 @@ ChipAuth = new Mongo.Collection('chipauth');
 Meteor.publish("chipauth", function() {
   return ChipAuth.find({user: this.userId})
 });
+
+
+// mewsician accessories
+
+Accessories = new Mongo.Collection('accessories');
+
+Meteor.publish("accessories", function() {
+  return Accessories.find({user: this.userId})
+});
