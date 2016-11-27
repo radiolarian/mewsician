@@ -56,6 +56,9 @@ Template.decorate.onRendered(function (){
   $('#experience').progress({
     percent: 42
   });
+  $('#fish').progress({
+    percent: Meteor.user().profile.fish
+  });
 });
 
 Template.decorate.events({

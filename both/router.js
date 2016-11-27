@@ -90,7 +90,7 @@ Router.map(function () {
               that.response.writeHead(503, {'Content-Type': 'application/json; charset=utf-8'});
               that.response.end("internal error.\n" + err.toString());
             } else { // adding fish for gamification, return 200-OK
-              try { Meteor.users.update(user._id, {$inc: {fish: Math.floor(ref.size/100000) }}); }
+              try { Meteor.call("addFish", user._id, Math.floor(ref.size/100000)); }
               catch(err) { console.error("Error while updating user fish: ", err.toString()); }
 
               that.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});

@@ -1,6 +1,18 @@
 // server data handling methods
 
 Meteor.methods({
+  addFish(id, fish) {
+    Meteor.users.update(id,
+      {$inc: {"profile.fish": fish }}
+    );
+  },
+
+  spendFish(id, fish) {
+    Meteor.users.update(id,
+      {$dec: {"profile.fish": fish }}
+    );
+  },
+
   removeFile(id) {
     if (Music.findOne(id)) {
       //Music.deCloud(id); // for some reason this deletes all data in the database, which is not good.
