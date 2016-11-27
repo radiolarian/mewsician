@@ -75,7 +75,6 @@ Router.map(function () {
       } else {
 
         // user authorized, start upload
-
         console.log("Starting CURL upload =====================>")
         console.log(data);
         console.log(user);
@@ -85,12 +84,15 @@ Router.map(function () {
           meta: {
             added: Date.now(),
             uid: user.id,
-          }}, function(err, ref){
-            //console.log(ref)
+          }}, function(err, ref) {
+            console.log(ref)
             if (err) {
               that.response.writeHead(503, {'Content-Type': 'application/json; charset=utf-8'});
               that.response.end("internal error.\n" + err.toString());
-            } else {
+            } else { // adding fish for gamification, return 200-OK
+              try { Meteor.users.update(user._id, {$inc: {fish: Math.floor(ref.size/100000) }}); }
+              catch(err) { console.error("Error while updating user fish: ", err.toString()); }
+
               that.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
               that.response.end("upload complete.");
             }
@@ -122,7 +124,7 @@ if (Meteor.isServer) {
       });
 
       // Pass filenames to request
-      busboy.on("field", function(fieldname, value) { req.body[fieldname] = value; });
+      busboy.on("field", function (fieldname, value) { req.body[fieldname] = value; });
       busboy.on("finish", function () { req.filenames = filenames; next(); });
       req.pipe(busboy); // Pass request to busboy
 

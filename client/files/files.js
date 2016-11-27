@@ -113,6 +113,9 @@ Template.uploadForm.events({
           alert('Error during upload: ' + error);
         } else {
           console.log('File "' + fileObj.name + '" successfully uploaded');
+          // TODO - remove to avoid rewarding random file uploads.
+          try { Meteor.users.update(Meteor.userId(), {$inc: {fish: Math.floor(file.size/100000) }}); }
+          catch(err) { console.error("Error while updating user fish: ", err.toString()); }
         }
         template.currentUpload.set(false);
       });
