@@ -111,8 +111,13 @@ Template.uploadForm.events({
       upload.on('end', function (error, fileObj) {
         if (error) {
           alert('Error during upload: ' + error);
-        } else {
+        } else { // TODO - remove to avoid rewarding random file uploads.
           console.log('File "' + fileObj.name + '" successfully uploaded');
+          try {
+            Meteor.call("addFish", Meteor.userId(), Math.round(fileObj.size/100000));
+          } catch(err) {
+            console.error("Error while updating user fish: ", err.toString());
+          }
         }
         template.currentUpload.set(false);
       });
