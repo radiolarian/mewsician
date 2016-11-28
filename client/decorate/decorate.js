@@ -57,9 +57,8 @@ Template.decorate.onRendered(function (){
   $('#experience').progress({
     percent: 42
   });
-  $('#fish').progress({
-    percent: Meteor.user().profile.fish
-  });
+ if (typeof Meteor.user().profile != 'undefined')
+    Meteor.user().profile.fish = 10; //yay demo, but can't actually do this assignment
 });
 
 Template.decorate.events({
