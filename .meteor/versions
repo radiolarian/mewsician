@@ -83,6 +83,7 @@ routepolicy@1.0.12
 ryanswapp:interactjs@0.1.0
 semantic:ui@2.2.1
 semantic:ui-data@2.2.4
+semantic:ui-icon@2.1.4
 service-configuration@1.0.11
 session@1.1.7
 sha@1.0.9
