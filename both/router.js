@@ -14,6 +14,10 @@ Router.route('/demo', {
   template: 'demo'
 });
 
+Router.route('/meow', {
+  template: 'mewsages'
+});
+
 Router.route('/dress', {
   template: 'decorate'
 });

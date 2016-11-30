@@ -2,11 +2,10 @@
   <title>mewsician</title>
   <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.52/wavesurfer.min.js"></script>
-	<link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-
+  <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.52/wavesurfer.min.js"></script>
+  <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
 </head>
 
 <!-- can insert things for every page here-->
@@ -14,94 +13,65 @@
 <body>
 </body>
 
+
 <template name="main">
   {{> navbar}}
   <div class="ui page grid main" id="main-content">
-	  <div class="row">
-	    <div class="column padding-reset">
-	        {{#if currentUser }}
-				  {{> yield}}
-				  {{/if}}
-
+    <div class="row">
+      <div class="column padding-reset">
+        {{#if currentUser }}
+        {{> yield}}
+        {{/if}}
       </div>
     </div>
   </div>
-
-
 </template>
 
 
 <template name="navbar">
-	<div class="ui menu" id="navbar">
-	  <div class="header item">
-			<a class="menu"><span class="helper"></span><img class="logo vcenter-align" src="images/logo.png" onmouseover="this.src='images/logo.gif'" onmouseout="this.src='images/logo.png'" /></a>
-	  </div>
-  			<div class="navbutton ui card">
-	        <a href="/"  class="navlink">
-		        <div class="image navbutton center aligned">
-			        <img class="navpic" src="images/recordings.png" onmouseover="this.src='images/recordings-hover.png'" onmouseout="this.src='images/recordings.png'" />
-		        </div>
-		        <div class="description center aligned">My Mewsic</div>
-         </a>
-        </div>
-        <div class="navbutton ui card">
-        <a href="#" class="mewsages">
-	        <div class="image navbutton center aligned">
-						<img class="navpic" src="images/mail.png" onmouseover="this.src='images/mail-hover.png'" onmouseout="this.src='images/mail.png'" />
-	        </div>
-	        <div class="description center aligned">My Mewsages</div>
-        </a>
-        </div>	  
-	
-        <div class="navbutton ui card">
-        <a href="/dress" class="dress">
-	        <div class="image navbutton center aligned">
-						<img class="navpic" src="images/mewsician.png" onmouseover="this.src='images/mewsician-hover.png'" onmouseout="this.src='images/mewsician.png'" />
-	        </div>
-	        <div class="description center aligned">My Mewsician</div>
-	        </a>
-        </div>
-
-     <div class="right menu">
-			  <span class="helper"></span><div class="navbar-login right aligned">Hello, <br/>
-			  {{> loginButtons}}!</div> 
-	   </div>
-
-	</div>
-
-<!-- 
-	<div class="ui grid">
-    <div class="computer tablet only row">
-      <div class="ui fixed menu navbar page grid" id="navbar">
- 				 <a href="#"><span class="helper"></span><img class="logo vcenter-align" src="images/logo.png" onmouseover="this.src='images/logo.gif'" onmouseout="this.src='images/logo.png'" /></a>
-        
-        <div class="navbutton ui card">
-	        <div class="image navbutton center aligned">
-		        <a href="#"><img class="navpic" src="images/recordings.png" onmouseover="this.src='images/recordings-hover.png'" onmouseout="this.src='images/recordings.png'" /></a>
-	        </div>
-	        <div class="description center aligned"><a href="#">My Mewsic</a></div>
-        </div>
-
-        <div class="navbutton ui card">
-	        <div class="image navbutton center aligned">
-						<a href="#"><img class="navpic" src="images/mail.png" onmouseover="this.src='images/mail-hover.png'" onmouseout="this.src='images/mail.png'" /></a>
-	        </div>
-	        <div class="description center aligned"><a href="#">My Mewsages</a></div>
-        </div>
-        <div class="navbutton ui card">
-	        <div class="image navbutton center aligned">
-						<a href="#"><img class="navpic" src="images/mewsician.png" onmouseover="this.src='images/mewsician-hover.png'" onmouseout="this.src='images/mewsician.png'" /></a>
-	        </div>
-	        <div class="description center aligned"><a href="#">My Mewsician</a></div>
-        </div>
-
-        
-			  <span class="helper"></span><div class="navbar-login right aligned">Hello, <br/>
-			  {{> loginButtons}}!</div>
-
-
-      </div>
+  <div class="ui menu" id="navbar">
+    <div class="header item">
+      <a class="menu"><span class="helper"></span><img class="logo vcenter-align" src="images/logo.png" onmouseover="this.src='images/logo.gif'" onmouseout="this.src='images/logo.png'" /></a>
     </div>
-  </div> -->
 
+    {{#if currentUser }}
+    <div class="navbutton ui card">
+      <a href="/"  class="navlink">
+        <div class="image navbutton center aligned">
+          <img class="navpic" src="images/recordings.png" onmouseover="this.src='images/recordings-hover.png'" onmouseout="this.src='images/recordings.png'" />
+        </div>
+        <div class="description center aligned">My Mewsic</div>
+      </a>
+    </div>
+
+    <div class="navbutton ui card">
+      <a href="/meows" class="mewsages">
+        <div class="image navbutton center aligned">
+          <img class="navpic" src="images/mail.png" onmouseover="this.src='images/mail-hover.png'" onmouseout="this.src='images/mail.png'" />
+        </div>
+        <div class="description center aligned">My Mewsages</div>
+      </a>
+    </div>
+
+    <div class="navbutton ui card">
+      <a href="/dress" class="dress">
+        <div class="image navbutton center aligned">
+          <img class="navpic" src="images/mewsician.png" onmouseover="this.src='images/mewsician-hover.png'" onmouseout="this.src='images/mewsician.png'" />
+        </div>
+        <div class="description center aligned">My Mewsician</div>
+      </a>
+    </div>
+
+    <div class="right menu">
+      <span class="helper"></span><div class="navbar-login right aligned">Hello, <br/>
+        {{> loginButtons}}!</div>
+    </div>
+    {{else}}
+
+    <div class="login">
+      {{> loginButtons}}
+    </div>
+
+    {{/if}}
+  </div>
 </template>
