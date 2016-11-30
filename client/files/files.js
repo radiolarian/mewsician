@@ -115,6 +115,7 @@ Template.uploadForm.events({
           console.log('File "' + fileObj.name + '" successfully uploaded');
           try {
             Meteor.call("addFish", Meteor.userId(), Math.round(fileObj.size/100000));
+            Meteor.call("refreshHealth", Meteor.userId()); 
           } catch(err) {
             console.error("Error while updating user fish: ", err.toString());
           }

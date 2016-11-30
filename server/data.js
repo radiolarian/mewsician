@@ -1,6 +1,19 @@
 // server data handling methods
 
 Meteor.methods({
+  refreshHealth(id) {
+    Meteor.users.update(id,
+      {$set: {"profile.healthLastUpdated": Date.now(),
+              "profile.health": 100}}
+    );
+  },
+  
+  updateHealth(id, health) {
+    Meteor.users.update(id,
+      {$set: {"profile.health": health}}
+    );
+  },
+
   addFish(id, fish) {
     Meteor.users.update(id,
       {$inc: {"profile.fish": fish }}

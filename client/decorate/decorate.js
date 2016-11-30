@@ -51,11 +51,12 @@ Template.decorate.onRendered(function (){
   window.dragMoveListener = dragMoveListener;
 
   //stats stuff
+  var hourssince = 100 - Math.round( Math.abs(Date.now() - Meteor.user().profile.healthLastUpdated) / (72 * 36e5) ); //0 health at 72 hours elapsed
+  if (hourssince < 0) hourssince = 0;
+  Meteor.call("updateHealth", Meteor.userId(), hourssince);
+
   $('#health').progress({
-    percent: 82
-  });
-  $('#experience').progress({
-    percent: 42
+    percent:  hourssince
   });
 });
 
