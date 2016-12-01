@@ -46,11 +46,12 @@ Meteor.methods({
 
   // MESSAGES
   addMessage(from, to, body) {
+    console.log(from, to, body)
     Messages.insert({
-      time: Date.now(),
-      body: body,
       from: from,
       to: to,
+      body: body,
+      time: Date.now(),
     });
   },
 

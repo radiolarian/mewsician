@@ -83,7 +83,7 @@ Template.file.events({
   "submit .rename": function (e) { // finish rename
     // get form data
     e.preventDefault()
-    const name = $("#filetitle")[0].value;
+    const name = $("#message")[0].value;
 
     // no empty filenames please...
     if (name == null || name == "")
