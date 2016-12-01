@@ -1,25 +1,25 @@
 // just update the time shown on the page from our chip
 
-import { Posts } from './posts';
+import { Posts } from "./posts";
 
 Router.configure({
-  layoutTemplate: 'main'
+  layoutTemplate: "main"
 });
 
-Router.route('/', {
-  template: 'files'
+Router.route("/", {
+  template: "files"
 });
 
-Router.route('/demo', {
-  template: 'demo'
+Router.route("/demo", {
+  template: "demo"
 });
 
-Router.route('/meows', {
-  template: 'mewsages'
+Router.route("/meows", {
+  template: "mewsages"
 });
 
-Router.route('/dress', {
-  template: 'decorate'
+Router.route("/dress", {
+  template: "decorate"
 });
 
 
@@ -27,9 +27,9 @@ Router.route('/dress', {
 
 Router.map(function () {
   // basic api demo to ensure the chip can work with our data
-  this.route('demotime', {
-    path: '/demotime/',
-    where: 'server',
+  this.route("demotime", {
+    path: "/demotime/",
+    where: "server",
     action () {
       // time stamp all incoming data
       data = this.request.body;

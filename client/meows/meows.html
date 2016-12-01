@@ -1,3 +1,13 @@
 <template name="mewsages">
-  hello there!
+  {{#each messages}}
+  {{> message }}
+  {{/each}}
+</template>
+
+<template name="message">
+  {{#if sent}}
+  <i> -&gt; {{to}} @ {{ time }} </i>: {{body}}
+  {{else}}
+  <i> &lt;- {{from}} @ {{ time }} </i> {{body}}
+  {{/if}}
 </template>

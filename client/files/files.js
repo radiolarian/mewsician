@@ -94,7 +94,7 @@ Template.file.events({
     Meteor.call("renameFile", this._id, name);
   },
 
-  "blur #filetitle": function (e) { // loses focus
+  "blur .rename": function (e) { // loses focus
     Session.set("renaming", null);
   },
 
