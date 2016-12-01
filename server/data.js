@@ -4,10 +4,10 @@ Meteor.methods({
   refreshHealth(id) {
     Meteor.users.update(id,
       {$set: {"profile.healthLastUpdated": Date.now(),
-              "profile.health": 100}}
+        "profile.health": 100}}
     );
   },
-  
+
   updateHealth(id, health) {
     Meteor.users.update(id,
       {$set: {"profile.health": health}}
@@ -24,6 +24,13 @@ Meteor.methods({
     Meteor.users.update(id,
       {$dec: {"profile.fish": fish }}
     );
+  },
+
+  renameFile(id, name) {
+    if (Music.findOne(id))
+      Music.update(id,
+        {$set: {name: name}}
+      );
   },
 
   removeFile(id) {

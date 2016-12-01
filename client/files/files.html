@@ -11,27 +11,34 @@
     <h3> upload here </h3>
     {{> uploadForm}}
 
-    <h3> chip auth
-    </h3>
+    <h3> chip auth </h3>
     <p> {{ apikey }} </p>
     <button id="regenerateKey" type="button">regenerate</button>
   </div>
 </template>
 
 <template name="file">
-  <h3>{{name}}</h3>
+  {{#if renaming}}
+  <form class="rename">
+    <input class="newFilename" type="text" name="title" value="{{name}}"><br/>
+  </form>
+  {{else}}
+  <h3 class="filename">{{name}}</h3>
+  {{/if}}
+
   <i>{{date}}</i>
-  <!-- Good TODO: allow renaming of files -->
+
   <div class="ui column grid">
     <div class="row">
       <div class="two wide column center align playcontainer">
         <span class="helper"></span><input type="image" src="images/play.png" id="{{_id}}-button" class="playbutton vcenter-align">
       </div>
+
       <div class="eleven wide column audiocontainer">
         <div id="{{_id}}"></div>
       </div>
-      <div class="one wide column right align">
 
+      <div class="one wide column right align">
         <div class="ui dropdown">
           <div class="text"></div>
           <i class="dropdown icon"></i>
@@ -40,7 +47,6 @@
             <div class="delete item"><a href="#"><i class="delete icon"></i> Delete</a></div>
           </div>
         </div>
-
       </div>
     </div>
   </div>

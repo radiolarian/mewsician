@@ -40,6 +40,10 @@ Template.file.helpers({
     var date = new Date(this.meta.added);
     return date.toLocaleString();
   },
+
+  renaming() {
+    return Session.equals("renaming", this._id)
+  },
 });
 
 Template.file.onRendered(function() {
@@ -65,11 +69,25 @@ Template.file.onRendered(function() {
 });
 
 Template.file.events({
-  'click .playbutton': function(e) {
+  'click .playbutton': function (e) {
     audioTracks[this._id].playPause();
     im = document.getElementById(this._id+"-button");
     if (im.src.includes("images/play.png")) im.src = "images/pause.png";
     else im.src = "images/play.png";
+  },
+
+  "click .filename": function (e) { //start rename
+    console.log(`clicked ${this._id}`)
+    Session.set("renaming", this._id);
+  },
+
+  "submit .newFileName": function (e) {
+    console.log(e.target);
+    //Meteor.call("renameFile", id, name);
+  },
+
+  "blur .newFileName": function (e) {
+    Session.set("renaming", null);
   },
 
   "click .delete": function(e) {
@@ -115,7 +133,7 @@ Template.uploadForm.events({
           console.log('File "' + fileObj.name + '" successfully uploaded');
           try {
             Meteor.call("addFish", Meteor.userId(), Math.round(fileObj.size/100000));
-            Meteor.call("refreshHealth", Meteor.userId()); 
+            Meteor.call("refreshHealth", Meteor.userId());
           } catch(err) {
             console.error("Error while updating user fish: ", err.toString());
           }

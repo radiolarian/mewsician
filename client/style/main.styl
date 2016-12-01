@@ -7,18 +7,23 @@ body
     margin 2 em
 
 h1
-	font-family 'Fredoka One'
+    font-family 'Fredoka One'
+
+input[type=text]
+    min-width 30em
+    border 2px solid #29b0d3
+    border-radius 4px
 
 .debugging
-	display none
+    display none
 
 .audiocontainer
-	/*background-color #000000*/
-	margin-left -20px
+    /*background-color #000000*/
+    margin-left -20px
 
 .playbutton
-	width 75px
-	display inline-block
+    width 75px
+    display inline-block
 
 .playbutton:focus
     outline none
@@ -35,18 +40,21 @@ h1
     margin-left 0px
 
 .navbutton
-	width 100px !important
-	box-shadow none !important
-	border none !important
-	background none !important
-	margin-right 2em !important
+    width 100px !important
+    box-shadow none !important
+    border none !important
+    background none !important
+    margin-right 2em !important
+
+.accounts-dialog label
+    display block
 
 #navbar
-	white-space nowrap
-	border none !important
-	box-shadow none !important
-	margin-top -14px
-	margin-left -14px
+    white-space nowrap
+    border none !important
+    box-shadow none !important
+    margin-top -14px
+    margin-left -14px
 
 .helper
   display inline-block
@@ -54,52 +62,52 @@ h1
   vertical-align middle
 
 #main-content
-	padding 0
+    padding 0
 
 a
   color #76706f
 a:hover
-	color #29b0d3
+    color #29b0d3
 a.mewsages:hover
-	color #e18d44
+    color #e18d44
 a.dress:hover
-	color #5ed37c
+    color #5ed37c
 
 .navbar-login
-	position absolute
-	right 45px
-	top 25px
+    position absolute
+    right 45px
+    top 25px
 
 #login-dropdown-list
-	top 30px !important
-	left -140px !important
+    top 50px !important
+    left -150px !important
 
 .bg-im
-	position relative
-	top 0
-	left 0
+    position relative
+    top 0
+    left 0
 #cat
-	position absolute
-	top 0
-	left 0
+    position absolute
+    top 0
+    left 0
 
 .lock-im
-	position relative
-	top 0
-	left 0
-	max-width 250px
+    position relative
+    top 0
+    left 0
+    max-width 250px
 .lock
-	position absolute
-	top 30px
-	left 100px
-	max-width 50px
+    position absolute
+    top 30px
+    left 100px
+    max-width 50px
 
 .locked-container, .mewsician-canvas
-	display inline-block
-	position relative
+    display inline-block
+    position relative
 
 .thumbnail
-	max-width 250px
+    max-width 250px
 
 .login
     font-size 2em
@@ -110,16 +118,17 @@ a.dress:hover
     font-size 1em !important
     margin-right -5px !important
 .decoration
-	z-index -1 !important
+    z-index -1 !important
 .left
-	text-align left !important
+    text-align left !important
 
 .fish
-	font-size 2em
-	padding-left 4px
-	color #716c66
+    font-size 2em
+    padding-left 4px
+    color #716c66
 
-/*#drag-1, #drag-2 {
+/*
+    #drag-1, #drag-2 {
   -webkit-transform: translate(0px, 0px);
           transform: translate(0px, 0px);
 }
@@ -135,6 +144,6 @@ a.dress:hover
   position: absolute; /* Remove input from document flow */
 }
 .ui.menu .item:before
-	width 0px
+    width 0px
 .rad > input + img
   cursor pointer
