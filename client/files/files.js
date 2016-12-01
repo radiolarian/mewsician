@@ -77,16 +77,24 @@ Template.file.events({
   },
 
   "click .filename": function (e) { //start rename
-    console.log(`clicked ${this._id}`)
     Session.set("renaming", this._id);
   },
 
-  "submit .newFileName": function (e) {
-    console.log(e.target);
-    //Meteor.call("renameFile", id, name);
+  "submit .rename": function (e) { // finish rename
+    // get form data
+    e.preventDefault()
+    const name = $("#filetitle")[0].value;
+
+    // no empty filenames please...
+    if (name == null || name == "")
+      return false;
+
+    // finish renaming the file
+    Session.set("renaming", null);
+    Meteor.call("renameFile", this._id, name);
   },
 
-  "blur .newFileName": function (e) {
+  "blur #filetitle": function (e) { // loses focus
     Session.set("renaming", null);
   },
 
@@ -135,7 +143,7 @@ Template.uploadForm.events({
             Meteor.call("addFish", Meteor.userId(), Math.round(fileObj.size/100000));
             Meteor.call("refreshHealth", Meteor.userId());
           } catch(err) {
-            console.error("Error while updating user fish: ", err.toString());
+            console.error("Error updating user fish: ", err.toString());
           }
         }
         template.currentUpload.set(false);

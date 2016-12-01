@@ -20,7 +20,7 @@
 <template name="file">
   {{#if renaming}}
   <form class="rename">
-    <input class="newFilename" type="text" name="title" value="{{name}}"><br/>
+    <input id="filetitle" type="text" name="title" value="{{name}}"><br/>
   </form>
   {{else}}
   <h3 class="filename">{{name}}</h3>
