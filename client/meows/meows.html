@@ -10,9 +10,20 @@
 
 <template name="message">
   {{#if sent}}
-  <i> -&gt; {{to}} @ {{ time }} </i>: {{body}}
+
+  <div class="in-message">
+    {{author}} - {{{body}}}
+
+    <!--<br/> {{ time }}-->
+  </div>
+
   {{else}}
-  <i> &lt;- {{from}} @ {{ time }} </i> {{body}}
+
+  <div class="out-message">
+    you - {{{body}}}
+
+    <!--<br/> {{ time }}-->
+  </div>
+
   {{/if}}
-  <br/>
 </template>

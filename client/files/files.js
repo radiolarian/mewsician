@@ -27,7 +27,6 @@ Template.files.helpers({
   },
 });
 
-
 // handling just a single file
 
 Template.file.helpers({
@@ -45,6 +44,10 @@ Template.file.helpers({
     return Session.equals("renaming", this._id)
   },
 });
+
+
+
+// SINGLE FILE HANDLING
 
 Template.file.onRendered(function() {
   var link;
@@ -65,7 +68,6 @@ Template.file.onRendered(function() {
   $('.ui.dropdown')
     .dropdown()
   ;
-
 });
 
 Template.file.events({
@@ -83,7 +85,7 @@ Template.file.events({
   "submit .rename": function (e) { // finish rename
     // get form data
     e.preventDefault()
-    const name = $("#message")[0].value;
+    const name = $("#filetitle")[0].value;
 
     // no empty filenames please...
     if (name == null || name == "")
@@ -99,7 +101,10 @@ Template.file.events({
   },
 
   "click .share": function(e) {
-    console.log(e)
+    var file = Music.findOne(this._id),
+      link = file.link(),
+      body = `shared music: <a target="_blank" href="${link}">${this.name}</a>`;
+    Meteor.call("addMessage", Meteor.user(), "group-id", body);
   },
 
   "click .delete": function(e) {
@@ -120,6 +125,11 @@ Template.uploadForm.helpers({
   },
 });
 
+
+
+
+// UPLOADING FILES
+//
 Template.uploadForm.events({
   'change #fileInput': function (e, template) {
     if (e.currentTarget.files && e.currentTarget.files[0]) {

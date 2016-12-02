@@ -18,18 +18,18 @@ Template.mewsages.events({
     if (body == null || body == "")
       return false;
 
-    Meteor.call("addMessage", Meteor.userId(), "TODO-FIX", body);
+    Meteor.call("addMessage", Meteor.user(), "group-id", body);
     $("#msg-text")[0].value = ""; // reset body
   },
 });
 
 Template.message.helpers({
   sent() {
-    return Meteor.userId() === this.from;
+    return Meteor.userId() === this.fid;
   },
 
   time() {
     var date = new Date(this.time);
     return date.toLocaleString();
-  }
+  },
 });

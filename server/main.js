@@ -32,8 +32,10 @@ Meteor.publish("accessories", function() {
 Messages = new Mongo.Collection("messages");
 
 Meteor.publish("messages", function() {
-  return Messages.find({$or:
-    [{from: this.userId},
-      {for: this.userId}]
-  });
+  return Messages.find({})
+
+  //return Messages.find({$or:
+  //[{from: this.userId},
+  //{for: this.userId}]
+  //});
 });

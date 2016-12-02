@@ -45,13 +45,13 @@ Meteor.methods({
 
 
   // MESSAGES
-  addMessage(from, to, body) {
-    console.log(from, to, body)
+  addMessage(from, group, body) {
     Messages.insert({
-      from: from,
-      to: to,
-      body: body,
+      author: from.emails[0].address,
       time: Date.now(),
+      fid: from._id,
+      group: group,
+      body: body,
     });
   },
 
