@@ -98,6 +98,10 @@ Template.file.events({
     Session.set("renaming", null);
   },
 
+  "click .share": function(e) {
+    console.log(e)
+  },
+
   "click .delete": function(e) {
     Meteor.call("removeFile", this._id);
   },
