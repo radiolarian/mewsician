@@ -49,6 +49,11 @@ input[type=text]
 .accounts-dialog label
     display block
 
+.helper
+  display inline-block
+  height 100%
+  vertical-align middle
+
 #navbar
     white-space nowrap
     border none !important
@@ -56,13 +61,17 @@ input[type=text]
     margin-top -14px
     margin-left -14px
 
-.helper
-  display inline-block
-  height 100%
-  vertical-align middle
-
 #main-content
     padding 0
+
+#login-dropdown-list
+    top 50px !important
+    left -150px !important
+
+#cat
+    position absolute
+    top 0
+    left 0
 
 a
   color #76706f
@@ -78,19 +87,10 @@ a.dress:hover
     right 45px
     top 25px
 
-#login-dropdown-list
-    top 50px !important
-    left -150px !important
-
 .bg-im
     position relative
     top 0
     left 0
-#cat
-    position absolute
-    top 0
-    left 0
-
 .lock-im
     position relative
     top 0
@@ -113,6 +113,9 @@ a.dress:hover
     font-size 2em
     padding 2em
 
+.content
+    max-width 800px
+
 .mname
     background none  !important
     font-size 1em !important
@@ -122,22 +125,14 @@ a.dress:hover
 .left
     text-align left !important
 
+.right
+    top 1.5em
+    right 0px
+    position absolute
 .fish
     font-size 2em
     padding-left 4px
     color #716c66
-
-/*
-    #drag-1, #drag-2 {
-  -webkit-transform: translate(0px, 0px);
-          transform: translate(0px, 0px);
-}
-
-#drag-me::before {
-  content: "#" attr(id);
-  font-weight: bold;
-}
-*/
 
 .rad > input { /* HIDE RADIO */
   visibility: hidden; /* Makes input not-clickable */

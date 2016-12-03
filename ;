@@ -94,9 +94,8 @@ Template.decorate.events({
   "keypress #mName": function (e) {
     if (!e) e = window.event;
     var keyCode = e.keyCode || e.which;
-
     if (keyCode == '13') { // Enter pressed
-      var mname = document.getElementById('mName').value;
+      var mname = document.getElementById('mName').value
 
       if (mname != "" && mname != undefined) {
         Meteor.call("updateMName", Meteor.userId(), mname)

@@ -1,17 +1,13 @@
 <template name="decorate">
-  <div class="ui column grid">
+  <div class="ui column grid content">
     <div class="row">
-      <div class="four wide column ">
         {{> stats}}
-      </div>
     </div>
 
     <div class="row">
-      <div class="ten wide column">
-        <div id="mewsician-canvas">
-          <img id="catbg" class="bg-im decoration" src="images/decorate/bg1.png">
-          <img id="cat" src="images/decorate/mewsician-large.png">
-        </div>
+      <div id="mewsician-canvas">
+        <img id="catbg" class="bg-im decoration" src="images/decorate/bg1.png">
+        <img id="cat" src="images/decorate/mewsician-large.png">
       </div>
     </div>
   </div>
@@ -49,7 +45,16 @@
   <div class="stats">
     <h4>Name</h4>
     <div class="ui massive transparent input">
-      <input type="text" placeholder="Mewsician">
+      {{#if currentUser.profile.mName }}
+      <input id="mName" type="text" placeholder="{{ currentUser.profile.mName }}">
+      {{else}}
+      <input id="mName" type="text" placeholder="Name your Mewsician!">
+      {{/if}}
+    </div>
+
+    <div class="right">
+      <!--<h4>Fish</h4>-->
+      <img src="images/decorate/fish.png" width="100px"> <span class="fish">{{ currentUser.profile.fish }} </span>
     </div>
 
     <h4>Health</h4>
@@ -57,8 +62,5 @@
       <div class="bar"></div>
       <div class="label left">{{ currentUser.profile.health }}%</div>
     </div>
-
-    <h4>Fish</h4>
-    <img src="images/decorate/fish.png" width="100px"> <span class="fish">{{ currentUser.profile.fish }} </span>
   </div>
 </template>

@@ -2,6 +2,14 @@
 
 Meteor.methods({
 
+  // MEWSICIAN NAME
+  updateMName(id, name) {
+    Meteor.users.update(id,
+      {$set: {"profile.mName": name}}
+    );
+  },
+
+
   // ACCESSORIES
   setAccessory(uid, name, x, y) { // add an accessory for a specific user
     Accessories.upsert({
