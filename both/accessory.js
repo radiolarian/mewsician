@@ -2,12 +2,13 @@
 
 Meteor.methods({
 
-  setAccessory(name, x, y) { // add an accessory for a specific user
+  setAccessory(uid, name, x, y) { // add an accessory for a specific user
+    console.log(name, x, y);
       Accessories.upsert({
-        user: Meteor.userId(),
+        user: uid,
         name: name,
         x: x,
-        y: y,
+        y: y
       });
     },
 

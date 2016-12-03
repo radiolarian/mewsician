@@ -1,6 +1,10 @@
 import { Template } from 'meteor/templating';
 
 Template.decorate.onRendered(function (){
+  Accessories.find({}).fetch().map(function(a) {
+    console.log(a);
+  });
+
 
   // target elements with the "draggable" class
   interact('.draggable')
@@ -33,8 +37,9 @@ Template.decorate.onRendered(function (){
     var target = event.target,
       // keep the dragged position in the data-x/data-y attributes
       x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-      y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
+      y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy,
+      item = target.className.split(" ")[0];
+    console.log('item is ', item);
     // translate the element
     target.style.webkitTransform =
       target.style.transform =
@@ -43,7 +48,7 @@ Template.decorate.onRendered(function (){
     // update the posiion attributes
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
-    //Meteor.call('setAccessory', 'arg', 'x', 'y'); 
+    Meteor.call('setAccessory', Meteor.userId(), item, x, y); 
 
   }
 
@@ -51,7 +56,8 @@ Template.decorate.onRendered(function (){
   window.dragMoveListener = dragMoveListener;
 
   //stats stuff
-  var hourssince = 100 - Math.round( Math.abs(Date.now() - Meteor.user().profile.healthLastUpdated) / (72 * 36e5) ); //0 health at 72 hours elapsed
+  var hourssince = Math.round((1 -  Math.abs(Date.now() - Meteor.user().profile.healthLastUpdated) / (36e5*72) ) * 100); //0 health at 72 hours elapsed
+  console.log("hours since is ", hourssince);
   if (hourssince < 0) hourssince = 0;
   Meteor.call("updateHealth", Meteor.userId(), hourssince);
 
