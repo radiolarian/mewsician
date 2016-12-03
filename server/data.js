@@ -2,6 +2,23 @@
 
 Meteor.methods({
 
+  // ACCESSORIES
+  setAccessory(uid, name, x, y) { // add an accessory for a specific user
+    Accessories.upsert({
+      user: uid,
+      name: name,
+    }, {
+      user: uid,
+      name: name,
+      x: x,
+      y: y
+    });
+  },
+  deleteAccessory(id) {
+    Accessories.remove({_id: id});
+  },
+
+
   // HEALTH
   refreshHealth(id) {
     Meteor.users.update(id,

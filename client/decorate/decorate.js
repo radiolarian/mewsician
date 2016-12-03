@@ -2,9 +2,15 @@ import { Template } from 'meteor/templating';
 
 Template.decorate.onRendered(function (){
   Accessories.find({}).fetch().map(function(a) {
-    console.log(a);
-  });
+    item = $("." + a.name)[0]
+    item.setAttribute('data-x', a.x);
+    item.setAttribute('data-y', a.y);
+    console.log(a, item)
 
+    item.style.webkitTransform =
+      item.style.transform =
+      'translate(' + a.x + 'px, ' + a.y + 'px)';
+  });
 
   // target elements with the "draggable" class
   interact('.draggable')
@@ -17,11 +23,13 @@ Template.decorate.onRendered(function (){
         endOnly: true,
         elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
       },
+
       // enable autoScroll
       autoScroll: true,
 
       // call this function on every dragmove event
       onmove: dragMoveListener,
+
       // call this function on every dragend event
       onend: function (event) {
         // var textEl = event.target.querySelector('p');
@@ -39,8 +47,9 @@ Template.decorate.onRendered(function (){
       x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
       y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy,
       item = target.className.split(" ")[0];
-    console.log('item is ', item);
+
     // translate the element
+    //console.log('item is ', item);
     target.style.webkitTransform =
       target.style.transform =
       'translate(' + x + 'px, ' + y + 'px)';
@@ -48,8 +57,7 @@ Template.decorate.onRendered(function (){
     // update the posiion attributes
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
-    Meteor.call('setAccessory', Meteor.userId(), item, x, y); 
-
+    Meteor.call('setAccessory', Meteor.userId(), item, x, y);
   }
 
   // this is used later in the resizing and gesture demos
@@ -71,6 +79,7 @@ Template.decorate.events({
     //radio button
     var radios = document.getElementsByName('bg');
     var bgim =  document.getElementById("catbg");
+
     for (var i = 0, length = radios.length; i < length; i++) {
       if (radios[i].checked) {
         // do whatever you want with the checked radio
@@ -81,5 +90,4 @@ Template.decorate.events({
       }
     }
   }
-
 });
