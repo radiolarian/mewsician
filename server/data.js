@@ -72,7 +72,7 @@ Meteor.methods({
   // MESSAGES
   addMessage(from, group, body) {
     Messages.insert({
-      author: from.emails[0].address,
+      author: from.profile.mName || from.emails[0].address,
       time: Date.now(),
       fid: from._id,
       group: group,
