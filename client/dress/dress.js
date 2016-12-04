@@ -33,6 +33,7 @@ Template.decorate.onRendered(function (){
 
       // call this function on every dragend event
       onend: function (event) {
+        $('.trash').removeClass('visible');
         // var textEl = event.target.querySelector('p');
 
         // textEl && (textEl.textContent =
@@ -43,6 +44,7 @@ Template.decorate.onRendered(function (){
     });
 
   function dragMoveListener (event) {
+    $('.trash').addClass('visible');
     var target = event.target,
       // keep the dragged position in the data-x/data-y attributes
       x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
