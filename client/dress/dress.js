@@ -1,6 +1,7 @@
 import { Template } from 'meteor/templating';
 
 Template.decorate.onRendered(function (){
+  // redraw where all the accessories go
   Accessories.find({}).fetch().map(function(a) {
     item = $("." + a.name)[0]
     item.setAttribute('data-x', a.x);
@@ -75,15 +76,19 @@ Template.decorate.onRendered(function (){
 });
 
 Template.decorate.events({
-  "click .rad": () => {
-    //radio button
+  "click .rad": () => { //radio button
     var radios = document.getElementsByName('bg');
     var bgim =  document.getElementById("catbg");
 
     for (var i = 0, length = radios.length; i < length; i++) {
       if (radios[i].checked) {
-        // do whatever you want with the checked radio
-        bgim.src = 'images/decorate/' + radios[i].value +'.png'
+        var background = 'images/decorate/' + radios[i].value +'.png'
+
+        // set in the users profile
+        Meteor.call("updateBackground", Meteor.userId(), background)
+
+        // set in the image
+        bgim.src = background
 
         // only one radio can be logically checked, don't check the rest
         break;
@@ -107,3 +112,13 @@ Template.decorate.events({
     }
   },
 });
+
+
+// return default or user background
+
+Template.decorate.helpers({
+  mBack() {
+    return Meteor.user().profile.background || "images/decorate/bg1.png"
+  },
+});
+

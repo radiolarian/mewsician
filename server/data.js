@@ -2,6 +2,14 @@
 
 Meteor.methods({
 
+  // USER BACKGROUND
+  updateBackground(id, bg) {
+    Meteor.users.update(id,
+      {$set: {"profile.background": bg}}
+    );
+  },
+
+
   // MEWSICIAN NAME
   updateMName(id, name) {
     Meteor.users.update(id,
