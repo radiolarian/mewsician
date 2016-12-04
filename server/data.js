@@ -20,9 +20,11 @@ Meteor.methods({
 
   // ACCESSORIES
   addAccessory(uid, name) { // add an accessory for a specific user
+    console.log(name)
     Accessories.insert({
       user: uid,
       name: name,
+      active: false,
     })
   },
   setAccessory(uid, name, x, y) { // move an accessory for a specific user
@@ -39,7 +41,7 @@ Meteor.methods({
   },
   removeAccessory(id) {
     Accessories.update(id,
-      { active: false }
+      {$set: { active: false }}
     );
   },
 

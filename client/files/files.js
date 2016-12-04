@@ -115,7 +115,7 @@ Template.file.events({
     Session.set("renaming", null);
   },
 
-  "click .share": function(e) {
+  "click .sharing": function(e) {
     var file = Music.findOne(this._id),
       link = file.link(),
       body = `shared music: <a target="_blank" href="${link}">${this.name}</a>`;

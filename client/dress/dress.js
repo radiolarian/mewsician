@@ -47,7 +47,7 @@ Template.decorate.onRendered(function (){
            * width : 224 */
 
         var rect = event.target.getBoundingClientRect(),
-          bounds = [rect.top > 750, rect.bottom < 1050, rect.left > 900, rect.right < 1100],
+          bounds = [rect.top > 750, rect.bottom < 1200, rect.left > 800, rect.right < 1500],
           count = bounds.reduce((m, b) => { return (b ? m+1 : m) }, 0),
           trash = count >= 3; // be in at least three of the bounds
 
@@ -91,12 +91,25 @@ Template.decorate.onRendered(function (){
 });
 
 Template.decorate.events({
-  "click .purchase": () => {
-    console.log("clicked!");
+  "click .purchase": (e) => {
+    Session.set("purchasing", e.target.className.split(" ")[1])
+
+    Meteor.call("addAccessory",
+      Meteor.userId(),
+      e.target.className.split(" ")[1]);
     $('.ui.modal')
       .modal('show')
     ;
   },
+
+  "click .confirm": (e) => {
+    // how to get event to add?
+    // probably use session var
+    $('.ui.modal')
+      .modal('hide')
+    ;
+  },
+
   "click .rad": () => { //radio button
     var radios = document.getElementsByName('bg');
     var bgim =  document.getElementById("catbg");
@@ -148,6 +161,10 @@ Template.decorate.helpers({
 
   closetItems() {
     return Accessories.find({active: false})
+  },
+
+  purchasing() {
+    return Session.get("purchasing")
   },
 });
 
