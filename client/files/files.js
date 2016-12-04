@@ -33,7 +33,7 @@ Template.files.events({
 
 Template.files.helpers({
   files() {
-    return Music.find({});
+    return Music.find({}, {sort: {"meta.added": -1}});
   },
 
   apikey() {
