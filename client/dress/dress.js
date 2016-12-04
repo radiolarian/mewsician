@@ -11,6 +11,10 @@ Template.decorate.onRendered(function (){
       'translate(' + a.x + 'px, ' + a.y + 'px)';
   });
 
+  $('.purchase')
+    .popup()
+  ;
+
   // target elements with the "draggable" class
   interact('.draggable')
     .draggable({
@@ -31,7 +35,7 @@ Template.decorate.onRendered(function (){
 
       // call this function on every dragend event
       onend: function (event) {
-        $('.trash').removeClass('visible');
+        $('.trash').removeClass('trash-visible');
         // var textEl = event.target.querySelector('p');
 
         // textEl && (textEl.textContent =
@@ -42,7 +46,7 @@ Template.decorate.onRendered(function (){
     });
 
   function dragMoveListener (event) {
-    $('.trash').addClass('visible');
+    $('.trash').addClass('trash-visible');
     var target = event.target,
       // keep the dragged position in the data-x/data-y attributes
       x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
@@ -76,6 +80,12 @@ Template.decorate.onRendered(function (){
 });
 
 Template.decorate.events({
+  "click .purchase": () => {
+    console.log("clicked!");
+    $('.ui.modal')
+      .modal('show')
+    ;
+  },
   "click .rad": () => { //radio button
     var radios = document.getElementsByName('bg');
     var bgim =  document.getElementById("catbg");
