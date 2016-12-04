@@ -1,29 +1,43 @@
 <template name="mewsages">
-  <form class="message">
-    <input id="msg-text" type="text" name="chat" value=""><br/>
-  </form>
-
+  
   {{#each messages}}
   {{> message }}
   {{/each}}
+
+  <form class="message">
+    <input id="msg-text" type="text" name="chat" value=""><br/>
+  </form>
 </template>
 
 <template name="message">
   {{#if sent}}
 
-  <div class="in-message">
-    {{author}} - {{{body}}}
+  <div class="message-container">
+    <div class="icon in-icon">
+      <!-- <img teacher >  -->
+    </div>
 
-    <!--<br/> {{ time }}-->
+    <div class="in-message">
+      {{author}} - {{{body}}}
+
+      <!--<br/> {{ time }}-->
+    </div>
   </div>
 
   {{else}}
 
-  <div class="out-message">
-    you - {{{body}}}
+<div class="message-container">
+    <div class="icon out-icon">
+      <!-- <img student >  -->
+    </div>
+    
+    <div class="out-message">
+      you - {{{body}}}
 
-    <!--<br/> {{ time }}-->
+      <!--<br/> {{ time }}-->
+    </div>
   </div>
-
   {{/if}}
+
 </template>
+
