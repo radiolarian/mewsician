@@ -1,5 +1,5 @@
 <template name="mewsages">
-  
+
   {{#each messages}}
   {{> message }}
   {{/each}}
@@ -11,30 +11,30 @@
 
 <template name="message">
   {{#if sent}}
+
+  <div class="out-message-container">
+    <div class="icon out-icon">
+      <img src="images/student-icon.png" alt="student">
+    </div>
+
+    <div class="out-message">
+      you - {{{body}}}
+      <!--<br/> {{ time }}-->
+    </div>
+
+  </div>
+  {{else}}
   <div class="in-message-container">
 
     <div class="icon in-icon">
-      <img src="images/teacher-icon.png" alt="teacher"> 
+      <img src="images/teacher-icon.png" alt="teacher">
     </div>
 
     <div class="in-message">
       {{author}} - {{{body}}}
     </div>
-      <!--<br/> {{ time }}-->
+    <!--<br/> {{ time }}-->
   </div>
-
-  {{else}}
-    <div class="out-message-container">
-       <div class="icon out-icon">
-        <img src="images/student-icon.png" alt="student"> 
-      </div>
-
-      <div class="out-message"> 
-        you - {{{body}}}
-        <!--<br/> {{ time }}-->
-      </div>
-
-    </div>
   {{/if}}
 
 </template>
