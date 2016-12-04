@@ -6,8 +6,6 @@ Template.decorate.onRendered(function (){
     item = $("." + a.name)[0]
     item.setAttribute('data-x', a.x);
     item.setAttribute('data-y', a.y);
-    console.log(a, item)
-
     item.style.webkitTransform =
       item.style.transform =
       'translate(' + a.x + 'px, ' + a.y + 'px)';
@@ -121,6 +119,10 @@ Template.decorate.events({
 Template.decorate.helpers({
   mBack() {
     return Meteor.user().profile.background || "images/decorate/bg1.png"
+  },
+
+  accessories() {
+    return Accessories.find({})
   },
 });
 
