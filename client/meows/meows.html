@@ -11,32 +11,30 @@
 
 <template name="message">
   {{#if sent}}
+  <div class="in-message-container">
 
-  <div class="message-container">
     <div class="icon in-icon">
-      <!-- <img teacher >  -->
+      <img src="images/teacher-icon.png" alt="teacher"> 
     </div>
 
     <div class="in-message">
       {{author}} - {{{body}}}
-
-      <!--<br/> {{ time }}-->
     </div>
+      <!--<br/> {{ time }}-->
   </div>
 
   {{else}}
+    <div class="out-message-container">
+       <div class="icon out-icon">
+        <img src="images/student-icon.png" alt="student"> 
+      </div>
 
-<div class="message-container">
-    <div class="icon out-icon">
-      <!-- <img student >  -->
-    </div>
-    
-    <div class="out-message">
-      you - {{{body}}}
+      <div class="out-message"> 
+        you - {{{body}}}
+        <!--<br/> {{ time }}-->
+      </div>
 
-      <!--<br/> {{ time }}-->
     </div>
-  </div>
   {{/if}}
 
 </template>
