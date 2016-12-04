@@ -2,14 +2,16 @@ import { Template } from 'meteor/templating';
 
 Template.decorate.onRendered(function (){
   // redraw where all the accessories go
-  Accessories.find({}).fetch().map(function(a) {
-    item = $("." + a.name)[0]
-    item.setAttribute('data-x', a.x);
-    item.setAttribute('data-y', a.y);
-    item.style.webkitTransform =
-      item.style.transform =
-      'translate(' + a.x + 'px, ' + a.y + 'px)';
-  });
+  Accessories
+    .find({active: true})
+    .fetch().map(function(a) {
+      item = $("#" + a._id)[0]
+      item.setAttribute('data-x', a.x);
+      item.setAttribute('data-y', a.y);
+      item.style.webkitTransform =
+        item.style.transform =
+        'translate(' + a.x + 'px, ' + a.y + 'px)';
+    });
 
   $('.purchase')
     .popup()
@@ -36,12 +38,21 @@ Template.decorate.onRendered(function (){
       // call this function on every dragend event
       onend: function (event) {
         $('.trash').removeClass('trash-visible');
-        // var textEl = event.target.querySelector('p');
 
-        // textEl && (textEl.textContent =
-        //   'moved a distance of '
-        //   + (Math.sqrt(event.dx * event.dx +
-        //                event.dy * event.dy)|0) + 'px');
+          /** bottom : 1102.8125
+           * height : 333
+           * left : 922
+           * right : 1146
+           * top : 769.8125
+           * width : 224 */
+
+        var rect = event.target.getBoundingClientRect(),
+          bounds = [rect.top > 750, rect.bottom < 1050, rect.left > 900, rect.right < 1100],
+          count = bounds.reduce((m, b) => { return (b ? m+1 : m) }, 0),
+          trash = count >= 3; // be in at least three of the bounds
+
+        if (trash)
+          Meteor.call("removeAccessory", event.target.id)
       }
     });
 
@@ -132,7 +143,11 @@ Template.decorate.helpers({
   },
 
   accessories() {
-    return Accessories.find({})
+    return Accessories.find({active: true})
+  },
+
+  closetItems() {
+    return Accessories.find({active: false})
   },
 });
 

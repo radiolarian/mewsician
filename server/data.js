@@ -19,19 +19,28 @@ Meteor.methods({
 
 
   // ACCESSORIES
-  setAccessory(uid, name, x, y) { // add an accessory for a specific user
+  addAccessory(uid, name) { // add an accessory for a specific user
+    Accessories.insert({
+      user: uid,
+      name: name,
+    })
+  },
+  setAccessory(uid, name, x, y) { // move an accessory for a specific user
     Accessories.upsert({
       user: uid,
       name: name,
     }, {
-      user: uid,
+      active: true,
       name: name,
+      user: uid,
       x: x,
       y: y
     });
   },
-  deleteAccessory(id) {
-    Accessories.remove({_id: id});
+  removeAccessory(id) {
+    Accessories.update(id,
+      { active: false }
+    );
   },
 
 
