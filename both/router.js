@@ -1,7 +1,5 @@
 // just update the time shown on the page from our chip
 
-import { Posts } from "./posts";
-
 Router.configure({
   layoutTemplate: "main"
 });
@@ -23,30 +21,12 @@ Router.route("/dress", {
 });
 
 
-// handle very simple post requests by dumping into posts mongo collection
-
+// mapping the client route to upload a file automatically.
+// this is for handling incoming files from CURL (on CHIP)
+// the file data is included using curl's form (-F) fields.
+// handle uploading media files over api into Google cloud storage
+// need to use client API since Music.insert only exposed there.
 Router.map(function () {
-  // basic api demo to ensure the chip can work with our data
-  this.route("demotime", {
-    path: "/demotime/",
-    where: "server",
-    action () {
-      // time stamp all incoming data
-      data = this.request.body;
-      data.time = Date.now();
-      Posts.insert(data);
-
-      // respond saying successful post
-      this.response.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
-      this.response.end();
-    },
-  });
-
-  // mapping the client route to upload a file automatically.
-  // this is for handling incoming files from CURL (on CHIP)
-  // the file data is included using curl's form (-F) fields.
-  // handle uploading media files over api into Google cloud storage
-  // need to use client API since Music.insert only exposed there.
   this.route('upload', {
     path: '/upload/',
     where: 'server',
@@ -105,7 +85,8 @@ Router.map(function () {
               that.response.end("upload complete.");
             }
           }, true);
-      }}});
+      } }
+  });
 });
 
 
@@ -141,3 +122,4 @@ if (Meteor.isServer) {
     }
   });
 }
+
