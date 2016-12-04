@@ -8,6 +8,21 @@ Template.files.onRendered(function() {
   $('input[type="checkbox"]').click(function(){
     $(".debugging").toggle();
   });
+
+  $.semanticUiGrowl.defaultOptions = {
+    ele: 'body',
+    type: 'info',
+    offset: {
+      from: 'top',
+      amount: 20
+    },
+    align: 'center',
+    width: 250,
+    delay: 4000,
+    allow_dismiss: true,
+    stackup_spacing: 10
+  };
+
 });
 
 Template.files.events({
@@ -105,6 +120,10 @@ Template.file.events({
       link = file.link(),
       body = `shared music: <a target="_blank" href="${link}">${this.name}</a>`;
     Meteor.call("addMessage", Meteor.user(), "group-id", body);
+
+    $.semanticUiGrowl('Music shared in My Mewsages', {
+      header: 'Success'
+    });
   },
 
   "click .delete": function(e) {
