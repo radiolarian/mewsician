@@ -19,13 +19,65 @@
   {{/each}}
 
   <h4>Store</h4>
-  <img src="images/decorate/hat.png" class="hat draggable">
-  <img src="images/decorate/monocle.png" class="monocle draggable">
-  <img src="images/decorate/sunglasses.png" class="sunglasses draggable">
-  <img src="images/decorate/whiskers.png" class="whiskers draggable">
-  <div class="locked-container"><img class="lock-im" src="images/decorate/head1.png"><img src="images/decorate/lock.png" class="lock"></div>
-  <div class="locked-container"><img class="lock-im" src="images/decorate/head2.png"><img src="images/decorate/lock.png" class="lock"></div>
-  <div class="locked-container"><img class="lock-im" src="images/decorate/head3.png"><img src="images/decorate/lock.png" class="lock"></div>
+
+<div class="ui four column grid">
+  <div class="row">
+    <div class="column">
+    <img src="images/decorate/whiskers.png" class="purchase whiskers" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 5</div>"></div>
+    <div class="column">
+  <img src="images/decorate/mustache.png" class="purchase mustache" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 50</div>">
+
+</div>
+    <div class="column"> <img src="images/decorate/cheeks.png" class="purchase cheeks" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 20</div>">
+</div>
+
+  <div class="column">  <img src="images/decorate/monocle.png" class="purchase monocle" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 10</div>"></div>
+</div>
+
+<div class="row">
+  <div class="column">      <img src="images/decorate/headphones.png" class="purchase headphones" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 250 </div>">
+</div>
+  <div class="column">  <img src="images/decorate/glasses.png" class="purchase glasses" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 80</div>">
+</div>
+  <div class="column">        <img src="images/decorate/sunglasses.png" class="purchase sunglasses" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 45</div>">
+</div>
+    <div class="column">  <img src="images/decorate/hat.png" class="purchase hat" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 30</div>">
+</div>
+</div>
+<div class="row">
+<div class="column">     <img src="images/decorate/beanie.png" class="purchase beanie" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 120</div>">
+</div>
+<div class="column">      <img src="images/decorate/shoes.png" class="purchase shoes" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 400</div>">
+</div>
+<div class="column">      <img src="images/decorate/scarf.png" class="purchase scarf" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 500</div>">      
+</div>
+<div class="column">    <img src="images/decorate/feather.png" class="purchase feather" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 180</div>">
+</div>
+
+</div>
+<div class="row">
+<div class="column">
+    <img src="images/decorate/bling.png" class="purchase bling" data-html="<div class='purchase-popup'><img src='images/decorate/fish.png' width='35px'> 999</div>">      
+</div></div>
+  </div>
+
+<div class="ui modal small-modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Purchase
+  </div>
+  <div class="image content">
+    <div class="description">
+      Are you sure you want to buy this?
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui button">Cancel</div>
+    <div class="ui button">OK</div>
+  </div>
+</div>
+
+
   <br/><br/>
 
   <h4>Backgrounds</h4>
@@ -40,7 +92,7 @@
   <label class="rad">
     <input type="radio" name="bg" value="bg3" />
     <img src="images/decorate/bg3.png" class="thumbnail">
-  </label>
+  </label> <br/><br/>
   <label class="rad">
     <input type="radio" name="bg" value="bg4" />
     <img src="images/decorate/bg4.png" class="thumbnail">
