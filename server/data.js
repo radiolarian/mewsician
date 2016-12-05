@@ -68,7 +68,7 @@ Meteor.methods({
   },
   spendFish(id, fish) {
     Meteor.users.update(id,
-      {$dec: {"profile.fish": fish }}
+      {$inc: {"profile.fish": (-1 * fish) }}
     );
   },
 

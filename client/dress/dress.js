@@ -92,22 +92,32 @@ Template.decorate.onRendered(function (){
 
 Template.decorate.events({
   "click .purchase": (e) => {
-    Session.set("purchasing", e.target.className.split(" ")[1])
+    var item = e.target.className.split(" ")[1]
+    Session.set("purchasing", item)
 
-    Meteor.call("addAccessory",
-      Meteor.userId(),
-      e.target.className.split(" ")[1]);
+    var cost = e.target.getAttribute("data-html").split(" ")[4]
+    Session.set("price", cost)
+
     $('.ui.modal')
-      .modal('show')
+      .modal({
+        onApprove: function() {
+
+          if (Meteor.user().profile.fish < cost) // not enough money
+            return "Not enough fish!";
+          else
+            Meteor.call("addAccessory", Meteor.userId(), item);
+
+          // deduct fish from user balance
+          Meteor.call("spendFish", Meteor.userId(), cost);
+
+          $(".modal").modal('toggle')
+        }
+      }).modal('show')
     ;
   },
 
-  "click .confirm": (e) => {
-    // how to get event to add?
-    // probably use session var
-    $('.ui.modal')
-      .modal('hide')
-    ;
+  "click .cancel": (e) => {
+    $(".modal").modal('toggle')
   },
 
   "click .rad": () => { //radio button
@@ -161,6 +171,10 @@ Template.decorate.helpers({
 
   closetItems() {
     return Accessories.find({active: false})
+  },
+
+  price() {
+    return Session.get("price")
   },
 
   purchasing() {
