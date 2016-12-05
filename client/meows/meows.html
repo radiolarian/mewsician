@@ -13,14 +13,24 @@
   {{#if sent}}
 
   <div class="out-message-container">
-    <div class="icon out-icon">
-      <img src="images/student-icon.png" alt="student">
+  <div class="in-message-container">
+    <div class="ui column grid">
+      <div class="row">
+      <div class="ten wide column ">
+            <div class="out-message">
+        <b>{{author}}</b><br/>
+        {{{body}}}
+        <br/> {{ time }}
+      </div>
+      </div>
+       <div class="two wide column">    
+        <div class="icon out-icon">
+          <img src="images/student-icon.png" alt="student">
+        </div>
+      </div>
+      </div>
     </div>
-
-    <div class="out-message">
-      {{{body}}}
-      <!--<br/> {{ time }}-->
-    </div>
+  </div>
 
   </div>
   {{else}}
