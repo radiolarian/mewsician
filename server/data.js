@@ -9,6 +9,18 @@ Meteor.methods({
     );
   },
 
+  resetMessages() {
+    Messages.remove({});
+  },
+
+  resetMusic() {
+    Music.remove({});
+  },
+
+  resetAccessories() {
+    Accessories.remove({});
+  },
+
 
   // MEWSICIAN NAME
   updateMName(id, name) {
