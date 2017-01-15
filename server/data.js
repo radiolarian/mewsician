@@ -94,7 +94,7 @@ Meteor.methods({
   },
   removeFile(id) {
     if (Music.findOne(id)) {
-      //Music.deCloud(id); // for some reason this deletes all data in the database, which is not good.
+      Music.deCloud(id); // FIXED
       Music.remove(id);
     }
   },

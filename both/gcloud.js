@@ -179,7 +179,7 @@ if (Meteor.isServer) {
       _.each(fileRef.versions, function(vRef) {
         console.warn("vRef: ", vRef);
         if (vRef != null ? (ref = vRef.meta) != null ? ref.pipePath : void 0 : void 0)
-          bucket.deleteFiles(vRef.meta.pipePath, err);
+          bucket.file(vRef.meta.pipePath).delete(err);
       });
     } catch (e) {
       err(e)
