@@ -175,8 +175,12 @@ if (Meteor.isServer) {
     let err = function(e) { if (e) console.error(e) }
     try { // delete from google cloud
       let fileRef = Music.findOne(id);
-      console.log(fileRef) // we only ever use the original version
-      bucket.deleteFiles(fileRef.versions.original.meta.pipePath, err);
+      console.log(fileRef.versions); // only ever use the original version
+      _.each(fileRef.versions, function(vRef) {
+        console.warn("vRef: ", vRef);
+        if (vRef != null ? (ref = vRef.meta) != null ? ref.pipePath : void 0 : void 0)
+          bucket.deleteFiles(vRef.meta.pipePath, err);
+      });
     } catch (e) {
       err(e)
     }
